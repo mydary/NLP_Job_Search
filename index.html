@@ -1,0 +1,1253 @@
+<title>Tepat Karir</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: satu kolom kerja lebar. Beranda berpusat pada kotak pencarian bahasa alami dengan panel
+   "yang kami tangkap" di sampingnya. Hasil berupa daftar baris berpemisah garis tipis, dengan cincin skor
+   di kanan. Motif visual: lingkaran konsentris (sasaran), sesuai nama "Tepat". */
+:root{
+  --paper:#F1F4F8; --surface:#FFFFFF; --sunk:#E7ECF3; --ink:#0D1B2E; --ink-2:#4A5A70; --line:#D3DCE8;
+  --accent:#2447F5; --on-accent:#FFFFFF; --accent-soft:#E2E8FF;
+  --mark:#B87E00; --mark-soft:#FFF1CC; --good:#0B7D56; --bad:#B4372C;
+  --shadow:0 1px 0 rgba(13,27,46,.04),0 14px 30px -18px rgba(13,27,46,.35);
+  --f-display:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;
+  --f-body:'Instrument Sans','Segoe UI',system-ui,sans-serif;
+  --f-mono:'JetBrains Mono',ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0A111D; --surface:#111B2B; --sunk:#0D1626; --ink:#E7EDF7; --ink-2:#9BAAC0; --line:#23324A;
+    --accent:#809AFF; --on-accent:#0A111D; --accent-soft:#1A2850;
+    --mark:#F2B930; --mark-soft:#3A2E0C; --good:#3FCB98; --bad:#FF8A7D;
+    --shadow:0 1px 0 rgba(0,0,0,.3),0 14px 30px -18px rgba(0,0,0,.8);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0A111D; --surface:#111B2B; --sunk:#0D1626; --ink:#E7EDF7; --ink-2:#9BAAC0; --line:#23324A;
+  --accent:#809AFF; --on-accent:#0A111D; --accent-soft:#1A2850;
+  --mark:#F2B930; --mark-soft:#3A2E0C; --good:#3FCB98; --bad:#FF8A7D;
+  --shadow:0 1px 0 rgba(0,0,0,.3),0 14px 30px -18px rgba(0,0,0,.8);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:15px/1.55 var(--f-body);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--paper)}
+h1,h2,h3,h4{font-family:var(--f-display);margin:0;text-wrap:balance;letter-spacing:-.01em;line-height:1.12}
+p{margin:0}
+a{color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.wrap{width:100%;max-width:1180px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.eyebrow{font:600 11.5px/1 var(--f-mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2)}
+.muted{color:var(--ink-2)}
+.small{font-size:13px}
+
+/* Header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--paper);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;gap:8px 20px;flex-wrap:wrap;padding-block:10px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 20px/1 var(--f-display);letter-spacing:-.02em}
+.brand svg{flex:none}
+#nav{display:flex;gap:4px;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none}
+#nav a{padding:8px 12px;border-radius:6px;text-decoration:none;font-weight:500;color:var(--ink-2);white-space:nowrap}
+#nav a:hover{color:var(--ink);background:var(--sunk)}
+#nav a[aria-current="page"]{color:var(--ink);box-shadow:inset 0 -2px 0 var(--accent);border-radius:6px 6px 0 0}
+.icon-btn{width:38px;height:38px;display:grid;place-items:center;border:1px solid var(--line);background:var(--surface);border-radius:8px;cursor:pointer}
+.icon-btn:hover{border-color:var(--ink-2)}
+
+/* Controls */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:0 16px;border-radius:8px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-weight:600;text-decoration:none;white-space:nowrap}
+.btn:hover{border-color:var(--ink-2)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn.sm{min-height:32px;padding:0 11px;font-size:13px;border-radius:6px}
+.btn[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.link{background:none;border:0;padding:0;text-align:left;cursor:pointer;font:inherit;color:inherit}
+.link:hover{color:var(--accent);text-decoration:underline}
+.field{display:grid;gap:6px;min-width:0}
+.field>label,.lbl{font-weight:600;font-size:13px}
+input[type=text],input[type=number],input[type=search],select,textarea{width:100%;min-height:40px;padding:8px 11px;border:1px solid var(--line);border-radius:8px;background:var(--surface);min-width:0}
+textarea{resize:vertical;line-height:1.5}
+input:hover,select:hover,textarea:hover{border-color:var(--ink-2)}
+.seg{display:inline-flex;flex-wrap:wrap;border:1px solid var(--line);border-radius:8px;background:var(--surface);padding:3px;gap:2px}
+.seg label{position:relative}
+.seg input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.seg span{display:block;padding:6px 11px;border-radius:5px;font-size:13px;font-weight:600;color:var(--ink-2);cursor:pointer}
+.seg input:checked+span{background:var(--accent);color:var(--on-accent)}
+.seg input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:99px;font-size:12.5px;font-weight:500;border:1px solid var(--line);background:var(--surface);line-height:1.5}
+.chip.have{background:var(--accent-soft);border-color:transparent;color:var(--accent);font-weight:600}
+.chip.rel{border-color:var(--mark);color:var(--mark);background:transparent}
+.chip.miss{border-style:dashed;color:var(--ink-2);background:transparent}
+.chip.tag{background:var(--sunk);border-color:transparent}
+.chip button{border:0;background:none;cursor:pointer;padding:0 0 0 2px;color:inherit;font-size:14px;line-height:1}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+
+/* Beranda */
+.hero{padding-block:44px 28px;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:32px 48px;align-items:start}
+.hero h1{font-size:clamp(34px,5.4vw,60px);font-weight:800;letter-spacing:-.03em;line-height:1.02}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero .lead{margin-top:16px;font-size:17px;color:var(--ink-2);max-width:56ch}
+.searchbox{margin-top:24px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px;box-shadow:var(--shadow);display:grid;gap:10px}
+.searchbox textarea{border:0;padding:6px 4px;min-height:96px;background:transparent;font-size:16px}
+.searchbox textarea:hover{border:0}
+.searchbox .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.examples{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.examples button{border:1px solid var(--line);background:transparent;border-radius:99px;padding:5px 12px;font-size:13px;cursor:pointer}
+.examples button:hover{border-color:var(--accent);color:var(--accent)}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;min-width:0}
+.und{display:grid;gap:14px;margin:14px 0 0}
+.und>div{display:grid;grid-template-columns:104px minmax(0,1fr);gap:10px;align-items:start}
+.und dt{font:600 11.5px/1.9 var(--f-mono);text-transform:uppercase;letter-spacing:.07em;color:var(--ink-2)}
+.und dd{margin:0;min-width:0}
+.cbar{display:grid;grid-template-columns:minmax(0,1fr) 54px;gap:8px;align-items:center;font-size:13px;margin-bottom:5px}
+.cbar i{display:block;height:6px;border-radius:3px;background:var(--sunk);overflow:hidden}
+.cbar b{display:block;height:100%;background:var(--accent);border-radius:3px}
+.section{padding-block:36px}
+.section>.wrap>h2{font-size:clamp(24px,3vw,32px);font-weight:700}
+.section .sub{margin-top:8px;color:var(--ink-2);max-width:62ch}
+.pipe{margin:22px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border:1px solid var(--line);border-radius:12px;background:var(--surface);overflow:hidden}
+.pipe li{padding:16px;border-left:1px solid var(--line);min-width:0}
+.pipe li:first-child{border-left:0}
+.pipe .mono{font-size:12px;color:var(--accent);font-weight:600}
+.pipe h3{font-size:16px;margin:8px 0 6px}
+.pipe p{font-size:13.5px;color:var(--ink-2)}
+.cats{margin-top:20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+.cat{display:flex;justify-content:space-between;gap:10px;align-items:center;text-align:left;padding:13px 14px;border:1px solid var(--line);background:var(--surface);border-radius:10px;cursor:pointer}
+.cat:hover{border-color:var(--accent)}
+.cat span:first-child{font-weight:600}
+.cat .mono{color:var(--ink-2);font-size:12.5px}
+.rows{list-style:none;margin:0;padding:0}
+.latest{margin-top:18px;background:var(--surface);border:1px solid var(--line);border-radius:12px}
+.latest li{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:14px 18px;border-top:1px solid var(--line);flex-wrap:wrap}
+.latest li:first-child{border-top:0}
+.latest .t{font-weight:600}
+.meta{font-size:13.5px;color:var(--ink-2)}
+.note{margin-top:20px;font-size:13px;color:var(--ink-2);max-width:70ch}
+
+/* Cari */
+.page-h{padding-block:28px 8px}
+.page-h h1{font-size:clamp(26px,3.4vw,38px);font-weight:800}
+.cari{display:grid;grid-template-columns:260px minmax(0,1fr);gap:28px;padding-block:18px 48px;align-items:start}
+.filters{position:sticky;top:calc(env(safe-area-inset-top,0px) + 72px);display:grid;gap:16px;padding:16px;background:var(--surface);border:1px solid var(--line);border-radius:12px}
+.filters h2{font-size:16px}
+.qbox{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px;display:grid;gap:10px}
+.qbox textarea{border:0;background:transparent;min-height:72px;padding:4px}
+.qbox textarea:hover{border:0}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;margin-top:14px}
+.und-line{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;font-size:13.5px;color:var(--ink-2)}
+.count{margin-top:18px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;justify-content:space-between}
+.results{margin-top:10px;background:var(--surface);border:1px solid var(--line);border-radius:12px}
+.res{display:grid;grid-template-columns:minmax(0,1fr) 92px;gap:16px;padding:18px;border-top:1px solid var(--line)}
+.res:first-child{border-top:0}
+.res h3{font-size:19px;font-weight:700}
+.res .chips{margin-top:10px}
+.res .why{margin-top:10px;font-size:14px}
+.res .gap{margin-top:6px;font-size:13.5px;color:var(--ink-2)}
+.res .ranks{margin-top:10px;font-size:11.5px;color:var(--ink-2)}
+.res-side{display:grid;gap:10px;justify-items:center;align-content:start}
+.ring{position:relative;width:68px;height:68px}
+.ring svg{display:block}
+.ring b{position:absolute;inset:0;display:grid;place-items:center;font:700 16px var(--f-mono)}
+.empty{padding:34px 20px;text-align:center;color:var(--ink-2)}
+
+/* Drawer */
+#veil{position:fixed;inset:0;background:rgba(5,10,20,.5);z-index:70}
+#drawer{position:fixed;top:0;right:0;bottom:0;width:min(560px,100%);z-index:80;background:var(--surface);border-left:1px solid var(--line);overflow-y:auto;padding:22px max(20px,env(safe-area-inset-right,0px)) calc(28px + env(safe-area-inset-bottom,0px)) 22px;padding-top:calc(22px + env(safe-area-inset-top,0px));display:grid;gap:20px;align-content:start}
+#drawer .dh{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}
+#drawer h2{font-size:26px;font-weight:800}
+.split{display:grid;grid-template-columns:78px minmax(0,1fr);gap:16px;align-items:center}
+.brk{display:grid;gap:8px}
+.brk div{display:grid;grid-template-columns:104px minmax(0,1fr) 36px;gap:8px;align-items:center;font-size:13px}
+.brk i{display:block;height:7px;border-radius:4px;background:var(--sunk);overflow:hidden}
+.brk b{display:block;height:100%;background:var(--accent)}
+.formula{font:12.5px/1.6 var(--f-mono);color:var(--ink-2);background:var(--sunk);padding:8px 10px;border-radius:8px}
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 16px;margin:0}
+.facts dt{font:600 11px/1.4 var(--f-mono);text-transform:uppercase;letter-spacing:.07em;color:var(--ink-2)}
+.facts dd{margin:2px 0 0;font-weight:500}
+.d-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+
+/* Dasbor */
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;padding-bottom:20px}
+.stack{display:grid;gap:20px;min-width:0;align-content:start}
+.panel h2{font-size:20px}
+.form2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:14px}
+.form2 .wide{grid-column:1/-1}
+.rec li{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:12px 0;border-top:1px solid var(--line)}
+.rec li:first-child{border-top:0}
+.rec .mono{font-weight:700;color:var(--accent)}
+.gapbar{display:grid;grid-template-columns:130px minmax(0,1fr) 44px;gap:10px;align-items:center;font-size:13.5px;margin-top:10px}
+.gapbar i{display:block;height:8px;border-radius:4px;background:var(--sunk);overflow:hidden}
+.gapbar b{display:block;height:100%;background:var(--mark);border-radius:4px}
+.kanban{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:14px}
+.col{background:var(--sunk);border-radius:10px;padding:10px;display:grid;gap:8px;align-content:start;min-height:120px}
+.col h3{font:600 12px/1 var(--f-mono);letter-spacing:.07em;text-transform:uppercase;color:var(--ink-2);display:flex;justify-content:space-between}
+.kcard{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px;display:grid;gap:6px;font-size:13.5px}
+.kcard select{min-height:32px;padding:4px 8px;font-size:13px}
+.banner{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:10px 14px;border-radius:10px;background:var(--mark-soft);color:var(--ink);font-size:13.5px;margin-bottom:16px}
+
+/* Admin */
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);overflow-x:auto;margin-top:12px}
+.tabs button{border:0;background:none;padding:10px 14px;cursor:pointer;font-weight:600;color:var(--ink-2);white-space:nowrap;border-radius:6px 6px 0 0}
+.tabs button[aria-selected="true"]{color:var(--ink);box-shadow:inset 0 -2px 0 var(--accent)}
+.adm{padding-block:22px 56px;display:grid;gap:20px}
+.defs{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px 22px;margin:0}
+.defs dt{font:600 11px/1.4 var(--f-mono);text-transform:uppercase;letter-spacing:.07em;color:var(--ink-2)}
+.defs dd{margin:3px 0 0;font:700 26px/1.1 var(--f-display)}
+.hb{display:grid;grid-template-columns:150px minmax(0,1fr) 34px;gap:10px;align-items:center;font-size:13.5px;margin-top:8px}
+.hb i{display:block;height:9px;border-radius:5px;background:var(--sunk);overflow:hidden}
+.hb b{display:block;height:100%;background:var(--accent);border-radius:5px}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{padding:9px 12px;text-align:left;border-top:1px solid var(--line);vertical-align:top}
+thead th{border-top:0;font:600 11px/1.2 var(--f-mono);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-2);background:var(--sunk);white-space:nowrap}
+td.num,th.num{text-align:right;font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+tr.best td{background:var(--accent-soft)}
+.inline-form{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;align-items:end}
+.msg{font-size:13.5px;padding:8px 12px;border-radius:8px;background:var(--sunk)}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.eng-chip{display:inline-flex;align-items:center;gap:7px;height:38px;padding:0 12px;border:1px solid var(--line);background:var(--surface);border-radius:8px;cursor:pointer;font:inherit;font-size:13px;color:var(--ink)}
+.eng-chip:hover{border-color:var(--ink-2)}
+.eng-chip i{width:8px;height:8px;border-radius:50%;background:var(--ink-2);opacity:.5}
+.eng-chip.on i{background:var(--accent);opacity:1}
+#conn{border-bottom:1px solid var(--line);background:var(--sunk);padding-block:14px}
+#conn .row{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr) auto auto;gap:10px;align-items:end}
+#conn input{width:100%}
+@media (max-width:720px){#conn .row{grid-template-columns:minmax(0,1fr)}.eng-chip span{display:none}}
+footer{border-top:1px solid var(--line);padding-block:24px calc(28px + env(safe-area-inset-bottom,0px));font-size:13px;color:var(--ink-2)}
+
+@media (max-width:960px){
+  .hero{grid-template-columns:minmax(0,1fr)}
+  .pipe{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .pipe li{border-left:0;border-top:1px solid var(--line)}
+  .pipe li:nth-child(-n+2){border-top:0}
+  .pipe li:nth-child(even){border-left:1px solid var(--line)}
+  .cari{grid-template-columns:minmax(0,1fr)}
+  .filters{position:static}
+  .grid2,.two{grid-template-columns:minmax(0,1fr)}
+  .kanban{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:560px){
+  .res{grid-template-columns:minmax(0,1fr)}
+  .res-side{grid-auto-flow:column;justify-content:start;align-items:center}
+  .form2{grid-template-columns:minmax(0,1fr)}
+  .und>div{grid-template-columns:minmax(0,1fr)}
+  .kanban,.pipe{grid-template-columns:minmax(0,1fr)}
+  .pipe li{border-left:0!important;border-top:1px solid var(--line)!important}
+  .pipe li:first-child{border-top:0!important}
+  .gapbar{grid-template-columns:96px minmax(0,1fr) 40px}
+  .hb{grid-template-columns:104px minmax(0,1fr) 30px}
+  .brk div{grid-template-columns:84px minmax(0,1fr) 34px}
+  .facts{grid-template-columns:minmax(0,1fr)}
+}
+@media (prefers-reduced-motion:no-preference){
+  .cbar b,.brk b,.hb b,.gapbar b{transition:width .35s ease}
+}
+</style>
+
+<header class="top">
+  <div class="wrap bar">
+    <a class="brand" href="#beranda" aria-label="Tepat Karir, ke beranda">
+      <svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="13" fill="none" stroke="var(--ink)" stroke-width="2.4"/><circle cx="15" cy="15" r="7.6" fill="none" stroke="var(--ink)" stroke-width="2.4"/><circle cx="15" cy="15" r="3" fill="var(--accent)"/></svg>
+      <span>Tepat Karir</span>
+    </a>
+    <nav id="nav" aria-label="Menu utama">
+      <a href="#beranda" data-nav="beranda">Beranda</a>
+      <a href="#cari" data-nav="cari">Cari Lowongan</a>
+      <a href="#dasbor" data-nav="dasbor">Dasbor Saya</a>
+      <a href="#admin" data-nav="admin">Admin</a>
+    </nav>
+    <button class="eng-chip" id="eng-chip" type="button" aria-expanded="false" aria-controls="conn"><i></i><span id="eng-label">Mesin: browser</span></button>
+    <button class="icon-btn" id="theme" type="button" aria-label="Ganti tema terang atau gelap">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
+    </button>
+  </div>
+</header>
+<section id="conn" hidden aria-label="Sambungan ke API"><div class="wrap">
+  <div class="row">
+    <div class="field"><label for="conn-url">Alamat API</label><input type="text" id="conn-url" placeholder="http://127.0.0.1:8000" autocomplete="off"></div>
+    <div class="field"><label for="conn-user">Admin (opsional)</label><input type="text" id="conn-user" placeholder="nama pengguna" autocomplete="username"></div>
+    <div class="field"><label for="conn-pass">Sandi</label><input type="password" id="conn-pass" autocomplete="current-password"></div>
+    <button class="btn primary" type="button" id="conn-save">Hubungkan</button>
+    <button class="btn" type="button" id="conn-local">Pakai mesin browser</button>
+  </div>
+  <p class="small muted" id="conn-status" style="margin-top:10px" aria-live="polite"></p>
+</div></section>
+
+<main>
+<!-- BERANDA -->
+<section id="v-beranda" data-view="beranda">
+  <div class="wrap hero">
+    <div>
+      <p class="eyebrow">Pencarian kerja berbasis skill</p>
+      <h1 style="margin-top:14px">Tulis apa yang kamu bisa. <em>Tepat Karir</em> yang mencarikan kerjanya.</h1>
+      <p class="lead">Kamu tidak perlu tahu nama jabatannya. Ceritakan kemampuan dan pekerjaan yang kamu inginkan, lalu lihat lowongan yang paling sesuai, lengkap dengan alasan dan skill yang masih kurang.</p>
+      <form class="searchbox" id="hero-form">
+        <label class="lbl" for="q-hero">Ceritakan kemampuan dan pekerjaan yang kamu cari</label>
+        <textarea id="q-hero" rows="3"></textarea>
+        <div class="row">
+          <span class="small muted">Contoh: skill, level, lokasi, atau bidang yang kamu minati.</span>
+          <button class="btn primary" type="submit">Cari lowongan</button>
+        </div>
+      </form>
+      <div class="examples" id="examples" aria-label="Contoh pencarian"></div>
+    </div>
+    <aside class="panel" aria-live="polite">
+      <p class="eyebrow">Yang kami tangkap dari tulisanmu</p>
+      <dl class="und" id="und-hero"></dl>
+    </aside>
+  </div>
+
+  <div class="section"><div class="wrap">
+    <h2>Dari kalimatmu sampai skor kecocokan</h2>
+    <p class="sub">Setiap pencarian melewati lima tahap yang sama, dan hasilnya selalu disertai penjelasan.</p>
+    <ol class="pipe">
+      <li><span class="mono">1</span><h3>Bersihkan teks</h3><p>Huruf disamakan, tanda baca dibuang, kata penghubung disaring.</p></li>
+      <li><span class="mono">2</span><h3>Kenali skill</h3><p>"MS Excel" dan "excel" sama-sama dibaca sebagai Microsoft Excel.</p></li>
+      <li><span class="mono">3</span><h3>Cari dua arah</h3><p>BM25 mencocokkan kata. Embedding bidang mencocokkan makna.</p></li>
+      <li><span class="mono">4</span><h3>Gabung dengan RRF</h3><p>Dua daftar peringkat digabung tanpa membandingkan skor mentahnya.</p></li>
+      <li><span class="mono">5</span><h3>Beri skor dan alasan</h3><p>Skill, relevansi, level, dan lokasi dihitung lalu dijelaskan.</p></li>
+    </ol>
+  </div></div>
+
+  <div class="section"><div class="wrap">
+    <h2>Jelajahi lewat bidang</h2>
+    <p class="sub">Belum punya kata kunci? Pilih bidang, lalu lihat lowongan yang beririsan dengannya.</p>
+    <div class="cats" id="cats"></div>
+  </div></div>
+
+  <div class="section"><div class="wrap">
+    <h2>Lowongan terbaru</h2>
+    <ul class="rows latest" id="latest"></ul>
+    <p class="note">Semua lowongan dan perusahaan di sini adalah data sintetis untuk demonstrasi mesin pencarian. Tidak ada lowongan aktual dan tidak ada lamaran yang terkirim.</p>
+  </div></div>
+</section>
+
+<!-- CARI -->
+<section id="v-cari" data-view="cari" hidden>
+  <div class="wrap page-h">
+    <p class="eyebrow">Cari Lowongan</p>
+    <h1 style="margin-top:10px">Cari dengan kalimat biasa</h1>
+  </div>
+  <div class="wrap cari">
+    <aside class="filters" aria-label="Filter">
+      <h2>Filter</h2>
+      <div class="field"><label for="f-loc">Lokasi</label><select id="f-loc"></select></div>
+      <div class="field"><label for="f-lvl">Level</label><select id="f-lvl"></select></div>
+      <div class="field"><label for="f-type">Jenis pekerjaan</label><select id="f-type"></select></div>
+      <div class="field"><label for="f-sal">Gaji minimum (juta Rp per bulan)</label><input type="number" id="f-sal" min="0" step="1" value="0"></div>
+      <div class="field"><label for="f-sort">Urutkan</label>
+        <select id="f-sort"><option value="match">Kecocokan</option><option value="new">Terbaru</option><option value="sal">Gaji tertinggi</option></select></div>
+      <label style="display:flex;gap:8px;align-items:flex-start;font-size:13.5px"><input type="checkbox" id="f-prof" style="margin-top:3px"><span>Gabungkan dengan skill di profilku</span></label>
+      <button class="btn sm" type="button" id="f-reset">Atur ulang filter</button>
+    </aside>
+    <div style="min-width:0">
+      <form class="qbox" id="main-form">
+        <label class="lbl" for="q-main">Kemampuan dan pekerjaan yang kamu cari</label>
+        <textarea id="q-main" rows="2"></textarea>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between;align-items:center">
+          <span class="small muted">Tekan Ctrl+Enter untuk mencari.</span>
+          <button class="btn primary" type="submit">Cari</button>
+        </div>
+      </form>
+      <div class="toolbar">
+        <div><span class="lbl" id="m-lbl" style="margin-right:10px">Metode</span>
+          <div class="seg" role="radiogroup" aria-labelledby="m-lbl" id="methods">
+            <label><input type="radio" name="method" value="hybrid" checked><span>Hybrid (BM25 + makna)</span></label>
+            <label><input type="radio" name="method" value="bm25"><span>BM25</span></label>
+            <label><input type="radio" name="method" value="sem"><span>Makna</span></label>
+            <label><input type="radio" name="method" value="exact"><span>Kata persis</span></label>
+          </div></div>
+      </div>
+      <div class="und-line" id="und-line" aria-live="polite"></div>
+      <div class="count"><p id="count" class="muted"></p><p class="mono small muted" id="latency"></p></div>
+      <ul class="rows results" id="results"></ul>
+    </div>
+  </div>
+</section>
+
+<!-- DASBOR -->
+<section id="v-dasbor" data-view="dasbor" hidden>
+  <div class="wrap page-h">
+    <p class="eyebrow">Dasbor Saya</p>
+    <h1 style="margin-top:10px">Profil, rekomendasi, dan lamaranmu</h1>
+    <p class="muted" style="margin-top:8px;max-width:64ch">Data disimpan di browser ini saja. Tidak ada akun dan tidak ada data yang dikirim ke server.</p>
+  </div>
+  <div class="wrap" style="padding-block:18px 56px">
+    <div id="seed-note"></div>
+    <div class="grid2">
+      <div class="stack">
+        <section class="panel" aria-labelledby="h-prof">
+          <h2 id="h-prof">Profil dan skill</h2>
+          <div class="form2">
+            <div class="field"><label for="p-nama">Nama</label><input type="text" id="p-nama"></div>
+            <div class="field"><label for="p-edu">Pendidikan</label><input type="text" id="p-edu"></div>
+            <div class="field"><label for="p-lvl">Level pengalaman</label><select id="p-lvl"></select></div>
+            <div class="field"><label for="p-loc">Lokasi</label><select id="p-loc"></select></div>
+            <div class="field wide"><span class="lbl">Skill yang kamu miliki</span><div class="chips" id="p-skills"></div></div>
+            <div class="field wide"><label for="p-add">Tambah skill</label>
+              <div style="display:flex;gap:8px"><input type="text" id="p-add" list="skill-list" autocomplete="off" placeholder="Contoh: Tableau"><button class="btn" type="button" id="p-add-btn">Tambah</button></div>
+              <datalist id="skill-list"></datalist><p class="small muted" id="p-msg" aria-live="polite"></p></div>
+          </div>
+        </section>
+        <section class="panel" aria-labelledby="h-cv">
+          <h2 id="h-cv">Baca CV</h2>
+          <p class="muted small" style="margin-top:6px">Tempel teks CV atau pilih berkas .txt. Skill yang ditemukan ditambahkan ke profilmu.</p>
+          <div class="field" style="margin-top:12px"><label for="cv-text">Teks CV</label><textarea id="cv-text" rows="5" placeholder="Tempel isi CV di sini"></textarea></div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;align-items:center">
+            <button class="btn primary" type="button" id="cv-go">Ekstrak skill</button>
+            <input type="file" id="cv-file" accept=".txt,text/plain" aria-label="Pilih berkas CV .txt">
+          </div>
+          <p class="small muted" id="cv-msg" style="margin-top:10px" aria-live="polite"></p>
+        </section>
+      </div>
+      <div class="stack">
+        <section class="panel" aria-labelledby="h-rec">
+          <h2 id="h-rec">Rekomendasi untukmu</h2>
+          <ul class="rows rec" id="rec" style="margin-top:8px"></ul>
+        </section>
+        <section class="panel" aria-labelledby="h-gap">
+          <h2 id="h-gap">Skill yang paling sering kurang</h2>
+          <p class="muted small" style="margin-top:6px">Dihitung dari sepuluh rekomendasi teratas.</p>
+          <div id="gap"></div>
+        </section>
+      </div>
+    </div>
+    <section class="panel" aria-labelledby="h-trk">
+      <h2 id="h-trk">Pelacak lamaran</h2>
+      <p class="muted small" style="margin-top:6px">Catat sendiri status tiap lowongan. Tepat Karir tidak mengirim lamaran ke perusahaan.</p>
+      <div class="kanban" id="kanban"></div>
+    </section>
+    <section class="panel" aria-labelledby="h-sav" style="margin-top:20px">
+      <h2 id="h-sav">Lowongan tersimpan</h2>
+      <ul class="rows rec" id="saved" style="margin-top:8px"></ul>
+    </section>
+  </div>
+</section>
+
+<!-- ADMIN -->
+<section id="v-admin" data-view="admin" hidden>
+  <div class="wrap page-h">
+    <p class="eyebrow">Admin</p>
+    <h1 style="margin-top:10px">Data lowongan dan mutu pencarian</h1>
+    <p class="muted" style="margin-top:8px;max-width:66ch">Mode demo tanpa login. Perubahan pada lowongan dan kamus skill berlaku selama halaman ini terbuka, dan indeks pencarian dibangun ulang otomatis.</p>
+    <div class="tabs" role="tablist" id="tabs">
+      <button role="tab" data-tab="ringkasan">Ringkasan</button>
+      <button role="tab" data-tab="lowongan">Lowongan</button>
+      <button role="tab" data-tab="skill">Kamus skill</button>
+      <button role="tab" data-tab="aktivitas">Aktivitas pencarian</button>
+      <button role="tab" data-tab="evaluasi">Evaluasi mesin</button>
+    </div>
+  </div>
+  <div class="wrap adm" id="adm-body"></div>
+</section>
+</main>
+
+<div id="veil" hidden></div>
+<aside id="drawer" role="dialog" aria-modal="true" aria-label="Detail lowongan" hidden></aside>
+
+<footer><div class="wrap">
+  <p>Tepat Karir adalah purwarupa mesin pencarian lowongan. Data lowongan sintetis, perusahaan fiktif.</p><p id="foot-engine" style="margin-top:6px"></p>
+</div></footer>
+
+<script id="engine">
+const TK=(()=>{
+const LEVELS=['Magang','Entry Level','Junior','Mid-level','Senior'];
+const TYPES=['Full-time','Magang','Kontrak','Part-time'];
+const LOCS=['Jakarta','Bandung','Surabaya','Yogyakarta','Serang','Tangerang','Bekasi','Semarang','Denpasar','Remote'];
+const TODAY=new Date('2026-11-06T00:00:00+07:00');
+const CONCEPTS={data:'Analisis data',bi:'Pelaporan dan dashboard',ml:'Machine learning',backend:'Backend dan API',frontend:'Pengembangan web',mobile:'Aplikasi mobile',devops:'Infrastruktur dan cloud',design:'Desain produk',marketing:'Pemasaran digital',content:'Konten dan kreatif',finance:'Keuangan dan pajak',admin:'Administrasi',hr:'SDM dan rekrutmen',sales:'Penjualan dan layanan',security:'Keamanan siber',pm:'Manajemen proyek'};
+const CK=Object.keys(CONCEPTS);
+const ROLES={data:['Data Analyst','Junior Business Analyst'],bi:['Business Intelligence Analyst'],ml:['Data Scientist','ML Engineer'],backend:['Backend Developer'],frontend:['Frontend Developer','Web Developer'],mobile:['Mobile Developer'],devops:['DevOps Engineer','IT Support'],design:['UI/UX Designer'],marketing:['Digital Marketing Specialist'],content:['Content Writer','Video Editor'],finance:['Staf Akuntansi','Tax Officer'],admin:['Staf Administrasi'],hr:['HR Recruitment Officer'],sales:['Customer Service','Sales Executive'],security:['Security Analyst'],pm:['Project Coordinator','Product Manager']};
+const TERMS={
+data:['data','dataset','analisis','analis','analyst','analytics','statistik','statistics','insight','mengolah','pengolahan','query','database','basis data','etl','pandas','spreadsheet','riset','survei','survey'],
+bi:['dashboard','laporan','report','reporting','bi','business intelligence','visualisasi','visualization','kpi','metrik','bisnis','business','presentasi data','insight'],
+ml:['machine learning','model','prediksi','predictive','deep learning','nlp','kecerdasan buatan','algoritma','klasifikasi','neural','sentimen','eksperimen'],
+backend:['backend','api','server','database','microservice','rest','integrasi','arsitektur','endpoint','pembayaran'],
+frontend:['frontend','front-end','website','web','html','css','javascript','react','responsif','responsive','browser','antarmuka'],
+mobile:['mobile','android','ios','flutter','kotlin','aplikasi mobile'],
+devops:['devops','deployment','deploy','docker','ci/cd','cloud','infrastruktur','linux','kubernetes','jaringan','network','server','koneksi','komputer'],
+design:['desain','design','ui','ux','figma','prototipe','prototype','wireframe','visual','grafis','branding','ilustrasi','tampilan','pengguna'],
+marketing:['marketing','pemasaran','kampanye','campaign','seo','sosial media','social media','media sosial','iklan','ads','brand','audiens','engagement','promosi'],
+content:['konten','content','menulis','copywriting','artikel','menyunting','kreatif','video','editing','storytelling','naskah','blog'],
+finance:['keuangan','finance','akuntansi','accounting','pajak','audit','pembukuan','anggaran','budget','invoice','rekonsiliasi','transaksi'],
+admin:['administrasi','dokumen','arsip','korespondensi','jadwal','sekretaris','operasional','data entry','perkantoran','surat'],
+hr:['rekrutmen','recruitment','karyawan','talent','sumber daya manusia','hr','hrd','onboarding','payroll','kandidat','kepegawaian','merekrut'],
+sales:['penjualan','sales','pelanggan','customer','klien','client','layanan','negosiasi','target','retail','keluhan','melayani'],
+security:['keamanan','security','cyber','siber','pentest','enkripsi','vulnerability','firewall','serangan','insiden'],
+pm:['proyek','project','manajemen proyek','agile','scrum','koordinasi','roadmap','stakeholder','timeline','produk','product','mengoordinasikan']};
+const rx=s=>s.replace(/[.*+?^${}()|[\]\\\/]/g,'\\$&');
+const B='[a-z0-9_]';
+const CRE={};CK.forEach(k=>{CRE[k]=new RegExp('(?<!'+B+')(?:'+TERMS[k].map(rx).join('|')+')(?!'+B+')','g')});
+
+const SK=[];const SKM={};
+function S(n,cat,al,c){const s={n,cat,al:[n.toLowerCase(),...al],c};SK.push(s);SKM[n]=s}
+S('Python','Pemrograman',['py','python3'],{data:.8,ml:.6,backend:.6});
+S('SQL','Database',['sql server','structured query language'],{data:1,bi:.5,backend:.4});
+S('Microsoft Excel','Analisis Data',['excel','ms excel','spreadsheet','google sheets'],{data:.7,bi:.6,admin:.5,finance:.5});
+S('Power BI','Visualisasi Data',['powerbi','power bi desktop'],{bi:1,data:.6});
+S('Tableau','Visualisasi Data',['looker studio','data studio'],{bi:1,data:.6});
+S('Pandas','Analisis Data',['numpy','dataframe'],{data:1,ml:.4});
+S('Machine Learning','Machine Learning',['ml','deep learning','scikit-learn','sklearn','pembelajaran mesin'],{ml:1,data:.6});
+S('Statistik','Analisis Data',['statistics','statistika','spss'],{data:.9,ml:.5});
+S('NLP','Machine Learning',['natural language processing','pemrosesan bahasa alami','text mining'],{ml:1,data:.3});
+S('Analisis Data','Analisis Data',['analis data','data analysis','data analytics','analytics','analisa data','mengolah data','olah data','pengolahan data','mengolah dataset','data processing','data cleaning'],{data:1,bi:.4});
+S('Visualisasi Data','Visualisasi Data',['visualisasi','data visualization','dashboard','visualization','grafik'],{bi:1,data:.5});
+S('ETL','Database',['data pipeline','pipeline data'],{data:1,backend:.5});
+S('PostgreSQL','Database',['postgre sql','postgres'],{backend:.8,data:.7});
+S('MySQL','Database',['mariadb'],{backend:.8,data:.6});
+S('Django','Pemrograman',[],{backend:1});
+S('FastAPI','Pemrograman',['fast api'],{backend:1,ml:.2});
+S('PHP','Pemrograman',[],{backend:1});
+S('Laravel','Pemrograman',[],{backend:1});
+S('JavaScript','Pemrograman',['js','javascript es6'],{frontend:1,backend:.4});
+S('TypeScript','Pemrograman',['ts'],{frontend:1,backend:.4});
+S('Node.js','Pemrograman',['nodejs','node js','express.js'],{backend:1,frontend:.3});
+S('React','Pemrograman',['reactjs','react.js','next.js','nextjs'],{frontend:1});
+S('HTML/CSS','Pemrograman',['html','css','html5','css3','tailwind'],{frontend:1,design:.3});
+S('REST API','Pemrograman',['api','restful','rest','web service'],{backend:1,frontend:.2});
+S('Git','Alat Kerja',['github','gitlab','version control'],{backend:.4,frontend:.4,devops:.3,mobile:.3});
+S('Docker','Infrastruktur',['container','kontainer'],{devops:1,backend:.4});
+S('Linux','Infrastruktur',['ubuntu','bash','shell'],{devops:.9,security:.4});
+S('AWS','Infrastruktur',['amazon web services','cloud','gcp','azure','google cloud'],{devops:1,backend:.3});
+S('CI/CD','Infrastruktur',['ci cd','github actions','jenkins'],{devops:1});
+S('Flutter','Pemrograman',['dart'],{mobile:1});
+S('Android','Pemrograman',['kotlin','android studio'],{mobile:1});
+S('Jaringan Komputer','Infrastruktur',['networking','jaringan','cisco','mikrotik','tcp/ip'],{devops:.8,security:.6});
+S('Keamanan Siber','Keamanan',['cybersecurity','cyber security','keamanan informasi','pentest','penetration testing','keamanan jaringan'],{security:1,devops:.3});
+S('Figma','Desain',['adobe xd','sketch'],{design:1,frontend:.2});
+S('UI/UX Design','Desain',['ui/ux','ui ux','ux design','ui design','desain antarmuka','desain ui','desain ux','user experience','user interface'],{design:1});
+S('Riset Pengguna','Desain',['user research','usability testing','wawancara pengguna'],{design:.8,pm:.2});
+S('Adobe Photoshop','Desain',['photoshop','illustrator','adobe illustrator','canva','coreldraw'],{design:.8,content:.5});
+S('Desain Grafis','Desain',['graphic design','desain poster','desain grafik'],{design:.9,content:.4});
+S('Video Editing','Konten',['edit video','premiere','premiere pro','capcut','after effects','davinci resolve'],{content:1,design:.3});
+S('Digital Marketing','Pemasaran',['pemasaran digital','online marketing','performance marketing','meta ads','google ads','iklan online'],{marketing:1,content:.3});
+S('SEO','Pemasaran',['search engine optimization','optimasi mesin pencari'],{marketing:.8,content:.6});
+S('Google Analytics','Pemasaran',['ga4'],{marketing:.7,data:.5,bi:.3});
+S('Social Media','Pemasaran',['media sosial','sosial media','instagram','tiktok','social media management'],{marketing:.8,content:.6});
+S('Copywriting','Konten',['copywriter','menulis iklan','caption'],{content:.9,marketing:.6});
+S('Content Writing','Konten',['content writer','penulisan konten','menulis artikel','penulis konten','blog writing'],{content:1,marketing:.3});
+S('Akuntansi','Keuangan',['accounting','pembukuan','laporan keuangan','zahir','accurate'],{finance:1,admin:.2});
+S('Pajak','Keuangan',['perpajakan','taxation','spt','pph'],{finance:1});
+S('Microsoft Office','Alat Kerja',['ms office','microsoft word','ms word','powerpoint','office'],{admin:1});
+S('Administrasi','Administrasi',['administrasi perkantoran','sekretaris','pengarsipan','data entry','surat menyurat'],{admin:1});
+S('Rekrutmen','SDM',['recruitment','recruiting','talent acquisition','merekrut','screening cv','seleksi karyawan'],{hr:1});
+S('Customer Service','Layanan',['layanan pelanggan','cs','customer support','melayani pelanggan'],{sales:1});
+S('Penjualan','Layanan',['sales','berjualan','menjual','target penjualan'],{sales:1});
+S('Negosiasi','Layanan',['negotiation','bernegosiasi'],{sales:.8});
+S('Komunikasi','Soft Skill',['communication','public speaking','berkomunikasi','presentasi'],{admin:.3,sales:.3,hr:.3,pm:.3});
+S('Manajemen Proyek','Manajemen',['project management','mengelola proyek','project coordinator','pmp'],{pm:1});
+S('Agile','Manajemen',['scrum','kanban','sprint'],{pm:.9});
+
+let ALIAS=[];
+const slug=n=>'sk_'+n.toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_|_$/g,'');
+function compileAliases(){ALIAS=[];SK.forEach(s=>{new Set(s.al).forEach(a=>{ALIAS.push({re:new RegExp('(?<!'+B+')'+rx(a)+'(?!'+B+')','g'),slug:slug(s.n),n:s.n,len:a.length})})});ALIAS.sort((a,b)=>b.len-a.len)}
+function norm(text){let t=' '+String(text).toLowerCase()+' ';const f=new Set();for(const a of ALIAS){t=t.replace(a.re,()=>{f.add(a.n);return ' '+a.slug+' '})}return{t,found:[...f]}}
+const STOP=new Set('yang dan di ke dari untuk dengan pada dalam saya ingin mencari pekerjaan atau adalah ini itu akan bisa dapat sebagai juga serta kami anda kamu lowongan bidang menggunakan aku mau cari kerja bekerja sedang lagi the a an and or for of in to with we are is looking our you will be as on at by yang sebuah suatu para oleh agar sehingga karena jika bila sudah telah belum masih sangat lebih paling'.split(' '));
+function stem(w){if(w.startsWith('sk_')||w.length<=5||/\d/.test(w))return w;let x=w;x=x.replace(/(nya|kah|lah|kan|an)$/,'');if(x.length>5)x=x.replace(/^(meng|mem|men|ber|ter)/,'');return x.length>=4?x:w}
+function tokenize(t){return t.replace(/[^a-z0-9_]+/g,' ').split(' ').filter(x=>x&&x.length>1&&!STOP.has(x)).map(stem)}
+function unit(v){const n=Math.sqrt(v.reduce((a,b)=>a+b*b,0));return n?v.map(x=>x/n):v.map(()=>0)}
+function dot(a,b){let s=0;for(let i=0;i<a.length;i++)s+=a[i]*b[i];return s}
+function cvec(text,tags){const lt=String(text).toLowerCase();const v=CK.map(k=>(lt.match(CRE[k])||[]).length);tags.forEach(([n,w])=>{const s=SKM[n];if(s)CK.forEach((k,i)=>{v[i]+=(s.c[k]||0)*w})});return unit(v.map(Math.sqrt))}
+const skv={};function skillVec(n){return skv[n]||(skv[n]=unit(CK.map(k=>(SKM[n]&&SKM[n].c[k])||0)))}
+
+const JOBS=[];
+function J(title,company,loc,type,lvl,fam,req,pref,desc,smin,smax,days,dl){JOBS.push({id:'J'+String(JOBS.length+1).padStart(3,'0'),title,company,loc,type,lvl,fam,req,pref,desc,smin,smax,days,dl})}
+J('Junior Data Analyst','PT Nusantara Analitika','Jakarta','Full-time',1,'data',['Python','SQL','Microsoft Excel'],['Power BI','Pandas','Analisis Data'],'Mengolah dataset penjualan, membersihkan data yang berantakan, dan menyusun laporan mingguan untuk tim bisnis. Memakai query SQL dan skrip Python untuk analisis harian.',6,9,2,26);
+J('Data Analyst Intern','Kopi Lintas Digital','Jakarta','Magang',0,'data',['Microsoft Excel','SQL'],['Python','Visualisasi Data','Analisis Data'],'Membantu tim membersihkan data, membuat tabel pivot, dan menyusun visualisasi sederhana. Dibimbing langsung oleh analis senior.',3,4,5,20);
+J('Business Intelligence Analyst','PT Sentosa Finansial Teknologi','Jakarta','Full-time',2,'bi',['SQL','Power BI','Microsoft Excel'],['Tableau','Python','Visualisasi Data'],'Merancang dashboard dan laporan KPI untuk manajemen, memproses data transaksi, dan menyajikan business insight dalam rapat bulanan.',9,14,1,30);
+J('Junior Business Analyst','Mitra Logistik Prima','Bandung','Full-time',1,'bi',['Microsoft Excel','SQL','Komunikasi'],['Power BI','Analisis Data'],'Menggali kebutuhan bisnis dari tiap divisi, menganalisis proses operasional, dan menyusun rekomendasi berbasis data untuk stakeholder.',6,8,7,28);
+J('Data Scientist','Arunika AI Labs','Jakarta','Full-time',3,'ml',['Python','Machine Learning','Statistik','SQL'],['Pandas','Docker'],'Membangun model prediksi churn dan rekomendasi produk, mengevaluasi performa model, lalu menyerahkannya ke tim produk untuk dipakai.',15,25,3,35);
+J('Data Science Intern','Arunika AI Labs','Jakarta','Magang',0,'ml',['Python','Pandas'],['Machine Learning','Statistik'],'Eksplorasi data, feature engineering, dan membantu eksperimen model machine learning bersama tim riset.',3,5,4,22);
+J('Data Engineer','Dagang Cepat','Tangerang','Full-time',3,'data',['Python','SQL','PostgreSQL','ETL'],['Docker','AWS'],'Membangun dan merawat pipeline data harian dari berbagai sumber ke gudang data, memastikan data siap dipakai tim analis.',14,22,6,31);
+J('Analis Riset Pasar','Survei Cendekia','Yogyakarta','Full-time',1,'data',['Microsoft Excel','Statistik','Komunikasi'],['Visualisasi Data','Analisis Data'],'Mengolah data survei, menganalisis tren perilaku konsumen, dan menulis laporan riset untuk klien.',5,7,9,25);
+J('NLP Engineer','Bahasa Lab','Remote','Full-time',3,'ml',['Python','Machine Learning','NLP'],['FastAPI','Docker'],'Membangun layanan NLP berbahasa Indonesia seperti klasifikasi teks, pencarian semantik, dan analisis sentimen media sosial.',16,26,2,40);
+J('Junior Backend Developer','Teknologi Kota Pintar','Bandung','Full-time',2,'backend',['Python','Django','PostgreSQL','Git'],['Docker','REST API'],'Mengembangkan API untuk aplikasi layanan publik, merancang tabel database, dan menulis pengujian otomatis.',8,12,3,29);
+J('Backend Developer Laravel','Rumah Digital Nusa','Surabaya','Full-time',2,'backend',['PHP','Laravel','MySQL','Git'],['REST API'],'Membangun fitur backend untuk platform pemesanan, mengintegrasikan pembayaran, dan merawat kode lama.',8,12,8,27);
+J('Node.js Developer','Gerai Online Indonesia','Jakarta','Full-time',3,'backend',['JavaScript','Node.js','REST API','PostgreSQL'],['Docker','AWS'],'Merancang layanan backend berskala besar untuk toko online, menjaga performa API, dan mereview kode rekan tim.',14,22,1,33);
+J('Backend Intern','Edukasi Nusantara','Yogyakarta','Magang',0,'backend',['Python','Git'],['FastAPI','REST API'],'Belajar membuat endpoint API sederhana dan menyimpan data ke database bersama tim engineering.',2,3,10,18);
+J('Frontend Developer React','Studio Piksel','Jakarta','Full-time',2,'frontend',['JavaScript','React','HTML/CSS','Git'],['TypeScript','Figma'],'Membangun antarmuka web responsif dari desain Figma, menjaga konsistensi komponen, dan memperbaiki performa halaman.',9,15,2,30);
+J('Web Developer Fresh Graduate','Citra Media Web','Serang','Full-time',1,'frontend',['HTML/CSS','JavaScript'],['React','Git'],'Membuat dan merawat website perusahaan klien, menyesuaikan tampilan di berbagai ukuran layar, dan mengurus konten.',5,7,4,24);
+J('UI Engineer','Lensa Produk','Remote','Full-time',3,'frontend',['React','HTML/CSS','Figma'],['TypeScript'],'Mengubah prototipe menjadi komponen antarmuka yang rapi dan mudah dipakai ulang di seluruh produk.',14,20,5,32);
+J('Flutter Developer','Aplikasi Rakyat','Bandung','Full-time',2,'mobile',['Flutter','Git'],['REST API'],'Mengembangkan aplikasi mobile Android dan iOS dengan Flutter, terhubung ke API, dan merilis ke toko aplikasi.',9,14,6,28);
+J('Android Developer Intern','Edukasi Nusantara','Yogyakarta','Magang',0,'mobile',['Android','Git'],['REST API'],'Membantu membangun fitur aplikasi Android untuk platform belajar dan memperbaiki bug yang dilaporkan pengguna.',2,3,12,19);
+J('DevOps Engineer','Awan Biru Cloud','Jakarta','Full-time',3,'devops',['Docker','Linux','AWS','CI/CD'],['Git'],'Mengelola server dan deployment aplikasi di cloud, membangun pipeline CI/CD, dan memantau ketersediaan layanan.',15,24,2,36);
+J('Network Administrator','Jaringan Sentra','Tangerang','Full-time',2,'devops',['Jaringan Komputer','Linux'],['Keamanan Siber'],'Merawat jaringan kantor dan server, menangani gangguan koneksi, serta memastikan perangkat selalu terpantau.',7,10,9,26);
+J('IT Support','Mitra Solusi Teknologi','Serang','Full-time',1,'devops',['Microsoft Office','Jaringan Komputer','Komunikasi'],[],'Membantu pengguna kantor menyelesaikan masalah komputer, jaringan, dan aplikasi harian.',4,6,3,21);
+J('Junior Security Analyst','Benteng Siber','Jakarta','Full-time',2,'security',['Keamanan Siber','Linux','Jaringan Komputer'],['Python'],'Memantau peringatan keamanan, menganalisis insiden, dan membantu menutup celah keamanan pada sistem perusahaan.',9,14,5,29);
+J('UI/UX Designer','Studio Piksel','Jakarta','Full-time',2,'design',['Figma','UI/UX Design'],['Riset Pengguna'],'Merancang alur dan tampilan aplikasi, membuat prototipe, serta menguji desain bersama pengguna sebelum diserahkan ke developer.',8,13,4,31);
+J('UI/UX Design Intern','Edukasi Nusantara','Remote','Magang',0,'design',['Figma'],['UI/UX Design'],'Membantu tim desain membuat wireframe dan prototipe layar aplikasi belajar.',2,3,8,20);
+J('Graphic Designer','Kreasi Cetak Mandiri','Bekasi','Full-time',1,'design',['Adobe Photoshop','Desain Grafis'],['Video Editing'],'Menyiapkan desain brosur, spanduk, dan materi promosi cetak maupun digital sesuai arahan klien.',5,7,6,23);
+J('Digital Marketing Specialist','Dagang Cepat','Tangerang','Full-time',2,'marketing',['Digital Marketing','SEO','Google Analytics'],['Social Media'],'Menjalankan kampanye iklan online, mengoptimalkan konten agar mudah ditemukan, dan melaporkan hasil kampanye tiap minggu.',8,12,2,30);
+J('Social Media Executive','Kopi Lintas Digital','Jakarta','Full-time',1,'marketing',['Social Media','Copywriting'],['Desain Grafis','Video Editing'],'Mengelola akun media sosial brand, menulis caption, menjadwalkan unggahan, dan memantau interaksi audiens.',5,7,1,25);
+J('SEO Specialist','Lensa Produk','Remote','Full-time',3,'marketing',['SEO','Google Analytics','Content Writing'],['Digital Marketing'],'Menyusun strategi kata kunci, memperbaiki struktur situs, dan memantau peringkat pencarian organik.',10,16,7,33);
+J('Content Writer','Media Nusa Kata','Yogyakarta','Full-time',1,'content',['Content Writing','SEO'],['Copywriting'],'Menulis artikel blog dan naskah konten edukatif, melakukan riset topik, dan menyunting tulisan rekan.',4,6,3,22);
+J('Video Editor','Cerita Visual','Bandung','Kontrak',2,'content',['Video Editing'],['Adobe Photoshop'],'Menyunting video promosi dan konten media sosial, menambahkan animasi teks, serta menyesuaikan format tiap platform.',6,9,5,17);
+J('Staf Akuntansi','Mitra Logistik Prima','Jakarta','Full-time',1,'finance',['Akuntansi','Microsoft Excel'],['Pajak','Microsoft Office'],'Mencatat transaksi harian, menyusun laporan keuangan bulanan, dan merekonsiliasi rekening bank.',5,8,4,27);
+J('Junior Tax Officer','Konsultan Pajak Tertib','Surabaya','Full-time',2,'finance',['Pajak','Akuntansi','Microsoft Excel'],[],'Menghitung dan melaporkan pajak klien, menyiapkan dokumen pendukung, dan mendampingi pemeriksaan pajak.',6,9,6,25);
+J('Finance Intern','PT Sentosa Finansial Teknologi','Jakarta','Magang',0,'finance',['Microsoft Excel','Akuntansi'],[],'Membantu input data keuangan, menyusun rekap pengeluaran, dan menyiapkan bahan laporan bulanan.',3,4,9,19);
+J('Staf Administrasi','Sinar Perkasa','Serang','Full-time',1,'admin',['Microsoft Office','Administrasi','Komunikasi'],[],'Mengelola arsip dan dokumen kantor, menyusun surat menyurat, serta mengatur jadwal pertemuan pimpinan.',4,5,2,20);
+J('Admin Data Entry','Rumah Digital Nusa','Surabaya','Part-time',1,'admin',['Microsoft Excel','Administrasi'],[],'Memasukkan data pesanan ke spreadsheet dan memeriksa kesesuaiannya dengan dokumen asli.',2,3,11,18);
+J('HR Recruitment Officer','Talenta Karya','Jakarta','Full-time',2,'hr',['Rekrutmen','Komunikasi'],['Microsoft Office'],'Memasang iklan lowongan, menyaring CV, menjadwalkan wawancara kandidat, dan mengurus proses onboarding karyawan baru.',6,9,3,28);
+J('HR Intern','Talenta Karya','Jakarta','Magang',0,'hr',['Komunikasi','Microsoft Office'],['Rekrutmen'],'Membantu administrasi kepegawaian dan menyiapkan jadwal wawancara kandidat.',2,3,7,18);
+J('Customer Service Officer','Gerai Online Indonesia','Denpasar','Full-time',1,'sales',['Customer Service','Komunikasi'],[],'Melayani pertanyaan dan keluhan pelanggan lewat chat dan telepon, mencatat kasus, dan menindaklanjuti sampai selesai.',4,6,2,24);
+J('Sales Executive','Sinar Perkasa','Semarang','Full-time',1,'sales',['Penjualan','Negosiasi','Komunikasi'],[],'Menemui calon klien, menawarkan produk, bernegosiasi harga, dan mengejar target penjualan bulanan.',4,8,5,26);
+J('Project Coordinator','Teknologi Kota Pintar','Jakarta','Full-time',2,'pm',['Manajemen Proyek','Komunikasi'],['Agile','Microsoft Excel'],'Mengoordinasikan jadwal dan tugas antar tim proyek, memantau progres, dan melaporkan hambatan kepada stakeholder.',8,12,4,29);
+J('Associate Product Manager','Arunika AI Labs','Jakarta','Full-time',3,'pm',['Manajemen Proyek','Agile','SQL'],['Analisis Data'],'Menyusun roadmap produk, menulis kebutuhan fitur, dan memakai data pengguna untuk menentukan prioritas.',14,22,6,34);
+
+let IDX=null;const VEC=new Map();
+function jobText(j){return j.title+' . '+j.title+' . '+j.title+' . '+j.req.join(' ')+' . '+j.req.join(' ')+' . '+j.pref.join(' ')+' . '+j.desc}
+function build(){
+  compileAliases();
+  const post=new Map(),len=[],df=new Map();
+  JOBS.forEach((j,d)=>{
+    const toks=tokenize(norm(jobText(j)).t);len.push(toks.length);
+    const tf=new Map();toks.forEach(t=>tf.set(t,(tf.get(t)||0)+1));
+    tf.forEach((c,t)=>{if(!post.has(t))post.set(t,new Map());post.get(t).set(d,c);df.set(t,(df.get(t)||0)+1)});
+    VEC.set(j.id,cvec(j.title+' '+j.title+' '+j.title+' '+j.desc,[...j.req.map(s=>[s,1.5]),...j.pref.map(s=>[s,.7])]));
+  });
+  const N=JOBS.length,avg=len.reduce((a,b)=>a+b,0)/Math.max(1,N);
+  const norms=JOBS.map(()=>0);
+  post.forEach((m,t)=>{const idf=Math.log(1+N/m.size);m.forEach((c,d)=>{norms[d]+=(c*idf)**2})});
+  IDX={post,len,avg,N,norms:norms.map(Math.sqrt)};
+}
+const K1=1.5,Bb=.75;
+function bm25(toks){const sc=new Map();new Set(toks).forEach(t=>{const p=IDX.post.get(t);if(!p)return;const idf=Math.log(1+(IDX.N-p.size+.5)/(p.size+.5));p.forEach((tf,d)=>{sc.set(d,(sc.get(d)||0)+idf*tf*(K1+1)/(tf+K1*(1-Bb+Bb*IDX.len[d]/IDX.avg)))})});return sc}
+function tfidf(toks){const q=new Map();toks.forEach(t=>q.set(t,(q.get(t)||0)+1));const sc=new Map();let qn=0;q.forEach((c,t)=>{const p=IDX.post.get(t);if(!p)return;const idf=Math.log(1+IDX.N/p.size);const qw=c*idf;qn+=qw*qw;p.forEach((tf,d)=>{sc.set(d,(sc.get(d)||0)+qw*tf*idf)})});qn=Math.sqrt(qn)||1;sc.forEach((v,d)=>sc.set(d,v/(qn*(IDX.norms[d]||1))));return sc}
+function semantic(qv){const sc=new Map();JOBS.forEach((j,d)=>{const c=dot(qv,VEC.get(j.id));if(c>0)sc.set(d,c)});return sc}
+function exact(q){const ws=[...new Set(q.toLowerCase().split(/[^a-z0-9+#.\/]+/).filter(w=>w.length>2&&!STOP.has(w)))];const sc=new Map();JOBS.forEach((j,d)=>{const h=(j.title+' '+j.req.join(' ')+' '+j.pref.join(' ')+' '+j.desc).toLowerCase();let n=0;ws.forEach(w=>{if(new RegExp('(?<!'+B+')'+rx(w)+'(?!'+B+')').test(h))n++});if(n)sc.set(d,n)});return sc}
+function order(m,th=0){return [...m.entries()].filter(e=>e[1]>th).sort((a,b)=>b[1]-a[1]).map(e=>e[0])}
+function rrf(lists,k=60){const s=new Map();lists.forEach(l=>l.forEach((d,i)=>s.set(d,(s.get(d)||0)+1/(k+i+1))));return [...s.entries()].sort((a,b)=>b[1]-a[1]).map(e=>({d:e[0],score:e[1]}))}
+
+function understand(q,extra=[]){
+  const lt=q.toLowerCase();const seek=lt.replace(/(pernah|sudah|telah|selesai|habis|setelah|alumni|pengalaman)\s+(?:\w+\s+){0,2}?(magang|intern\w*)/g,' ');const n=norm(q);const skills=[...new Set([...n.found,...extra])];
+  const qv=cvec(q,skills.map(s=>[s,1.5]));
+  const top=CK.map((k,i)=>[k,qv[i]]).filter(x=>x[1]>.2).sort((a,b)=>b[1]-a[1]).slice(0,3);
+  const roles=[...new Set(top.slice(0,2).flatMap(x=>ROLES[x[0]]))].slice(0,3);
+  let level=null;
+  const yr=lt.match(/(\d+)\s*\+?\s*(tahun|thn|years?|yrs?)/);
+  if(/magang|intern/.test(seek))level=0;
+  else if(/senior|\blead\b|kepala/.test(lt))level=4;
+  else if(/\bjunior\b|\bjr\b/.test(lt))level=2;
+  else if(/fresh|lulusan baru|baru lulus|pemula|entry|tanpa pengalaman/.test(lt))level=1;
+  else if(/\bmid\b|menengah/.test(lt))level=3;
+  else if(yr){const y=+yr[1];level=y<=1?1:y<=2?2:y<=5?3:4}
+  let empType=null;
+  if(/magang|intern/.test(seek))empType='Magang';else if(/part[- ]?time|paruh waktu/.test(lt))empType='Part-time';else if(/kontrak|freelance/.test(lt))empType='Kontrak';else if(/full[- ]?time|penuh waktu/.test(lt))empType='Full-time';
+  let loc=null;
+  if(/remote|wfh|jarak jauh/.test(lt))loc='Remote';
+  else{for(const L of LOCS){if(new RegExp('(?<!'+B+')'+L.toLowerCase()+'(?!'+B+')').test(lt)){loc=L;break}}if(!loc&&/jogja/.test(lt))loc='Yogyakarta';if(!loc&&/\bbali\b/.test(lt))loc='Denpasar'}
+  return{skills,qv,concepts:top,roles,level,empType,loc,tokens:tokenize(n.t),empty:!q.trim()};
+}
+function related(sk,have){let best=0,w=null;have.forEach(h=>{const c=dot(skillVec(sk),skillVec(h));if(c>best){best=c;w=h}});return best>=.85?w:null}
+function matchFor(j,ctx){
+  const have=ctx.skills||[];const dv=VEC.get(j.id);
+  const cos=ctx.qv?dot(ctx.qv,dv):0;const R=Math.min(100,Math.round(cos*105));
+  const stat=l=>l.map(s=>have.includes(s)?{n:s,st:'have'}:(()=>{const w=related(s,have);return w?{n:s,st:'rel',via:w}:{n:s,st:'miss'}})());
+  const rq=stat(j.req),pf=stat(j.pref);
+  const cov=l=>l.length?l.reduce((a,x)=>a+(x.st==='have'?1:x.st==='rel'?.5:0),0)/l.length:null;
+  let S;
+  if(!have.length)S=R;else{const a=cov(rq),b=cov(pf);S=Math.round(100*(b==null?a:a*.85+b*.15))}
+  let E=70;
+  if(ctx.level!=null){const d=Math.abs(ctx.level-j.lvl);E=d===0?100:d===1?65:d===2?30:10}
+  if(ctx.empType)E=Math.round(E*(ctx.empType===j.type?1:.7));
+  let L=80;if(ctx.loc)L=ctx.loc===j.loc?100:j.loc==='Remote'?90:35;
+  const gate=Math.min(1,R/40);E=Math.round(E*gate);L=Math.round(L*gate);
+  const final=Math.min(99,Math.round(.4*S+.3*R+.2*E+.1*L));
+  let topC=null,bv=0;if(ctx.qv)CK.forEach((k,i)=>{const p=ctx.qv[i]*dv[i];if(p>bv){bv=p;topC=k}});
+  const jn=l=>l.length<2?l.join(''):l.slice(0,-1).join(', ')+' dan '+l[l.length-1];
+  const hv=rq.filter(x=>x.st==='have').map(x=>x.n).concat(pf.filter(x=>x.st==='have').map(x=>x.n));
+  const rl=rq.concat(pf).filter(x=>x.st==='rel');
+  const parts=[];
+  if(hv.length)parts.push('Cocok karena '+jn(hv.slice(0,3))+' sesuai dengan persyaratan.');
+  if(rl.length)parts.push(jn(rl.slice(0,2).map(x=>x.n))+' mirip dengan skill yang kamu punya ('+rl[0].via+').');
+  if(R>=55&&topC)parts.push('Makna pencarianmu dekat dengan bidang '+CONCEPTS[topC].toLowerCase()+'.');
+  if(ctx.level!=null&&E>=100)parts.push('Levelnya ('+LEVELS[j.lvl]+') sesuai.');
+  if(ctx.loc&&L===100)parts.push('Lokasinya sesuai.');
+  if(gate<1&&(ctx.level!=null||ctx.loc))parts.push('Kecocokan level dan lokasi dihitung sebagian karena bidangnya kurang cocok.');
+  if(!parts.length)parts.push('Kecocokannya rendah, hanya sedikit skill atau bidang yang beririsan.');
+  return{S,R,E,L,final,cos,req:rq,pref:pf,missing:rq.concat(pf).filter(x=>x.st==='miss').map(x=>x.n),explain:parts.join(' ')};
+}
+function filterFn(f){return d=>{const j=JOBS[d];if(f.loc&&j.loc!==f.loc)return false;if(f.lvl!==''&&f.lvl!=null&&j.lvl!==+f.lvl)return false;if(f.type&&j.type!==f.type)return false;if(f.sal&&j.smax<+f.sal)return false;return true}}
+function search(q,o={}){
+  const t0=performance.now();
+  const u=understand(q,o.extraSkills||[]);const pool=filterFn(o.filters||{});
+  if(u.empty){const items=JOBS.map((j,d)=>({job:j,idx:d,m:null,ranks:{}})).filter(r=>pool(r.idx)).sort((a,b)=>a.job.days-b.job.days);return{u,items,ms:performance.now()-t0}}
+  const toks=u.tokens;
+  const bmO=order(bm25(toks)),smO=order(semantic(u.qv),.1),exO=order(exact(q));
+  const bmR=new Map(bmO.map((d,i)=>[d,i+1])),smR=new Map(smO.map((d,i)=>[d,i+1]));
+  let ord;const m=o.method||'hybrid';
+  if(m==='bm25')ord=bmO;else if(m==='sem')ord=smO;else if(m==='exact')ord=exO;else ord=rrf([bmO.slice(0,30),smO.slice(0,30)]).map(x=>x.d);
+  ord=ord.filter(pool).slice(0,40);
+  const ctx={skills:u.skills,level:u.level,loc:u.loc,empType:u.empType,qv:u.qv};
+  let items=ord.map((d,i)=>({job:JOBS[d],idx:d,m:matchFor(JOBS[d],ctx),ranks:{bm:bmR.get(d),sem:smR.get(d)},pos:i}));
+  if(m==='hybrid'&&(o.sort||'match')==='match')items.sort((a,b)=>b.m.final-a.m.final||a.pos-b.pos);
+  if(o.sort==='new')items.sort((a,b)=>a.job.days-b.job.days);
+  if(o.sort==='sal')items.sort((a,b)=>b.job.smax-a.job.smax);
+  return{u,items,ms:performance.now()-t0};
+}
+function retrieve(method,q){
+  const u=understand(q);const toks=u.tokens;
+  const bmO=order(bm25(toks)),smO=order(semantic(u.qv),.1);
+  if(method==='exact')return order(exact(q));
+  if(method==='tfidf')return order(tfidf(toks));
+  if(method==='bm25')return bmO;
+  if(method==='sem')return smO;
+  return rrf([bmO.slice(0,30),smO.slice(0,30)]).map(x=>x.d);
+}
+const JUDGED=[
+['Saya menguasai Python, SQL, Pandas, dan visualisasi data. Mencari pekerjaan fresh graduate di bidang analisis data.',['data','bi']],
+['mengolah data dan membuat laporan bisnis',['bi','data']],
+['membangun aplikasi web dengan JavaScript dan React',['frontend']],
+['merancang tampilan aplikasi yang nyaman dipakai',['design']],
+['mengelola kampanye iklan online dan media sosial',['marketing']],
+['menyusun laporan keuangan dan menghitung pajak',['finance']],
+['membuat model prediksi dengan machine learning',['ml']],
+['mengelola server dan deployment aplikasi di cloud',['devops']],
+['membuat API dan menyimpan data di database',['backend']],
+['melayani pelanggan dan mengejar target penjualan',['sales']],
+['menjaga keamanan jaringan dari serangan',['security']],
+['merekrut karyawan baru dan mengatur wawancara',['hr']]];
+const METHODS=[['exact','E1 Kata kunci persis'],['tfidf','E2 TF-IDF + cosine'],['bm25','E3 BM25'],['sem','E4 Embedding makna'],['hybrid','E5 BM25 + makna (RRF)']];
+function evaluate(){
+  return METHODS.map(([key,label])=>{
+    let p5=0,r10=0,mrr=0,nd=0,ms=0;
+    JUDGED.forEach(([q,fams])=>{
+      const rel=new Set(JOBS.filter(j=>fams.includes(j.fam)).map(j=>j.idx!==undefined?j.idx:JOBS.indexOf(j)));
+      const t0=performance.now();let l;for(let r=0;r<5;r++)l=retrieve(key,q);ms+=(performance.now()-t0)/5;
+      const top=l.slice(0,10);const hits=top.map(d=>rel.has(d)?1:0);
+      p5+=hits.slice(0,5).reduce((a,b)=>a+b,0)/5;
+      r10+=rel.size?hits.reduce((a,b)=>a+b,0)/Math.min(10,rel.size):0;
+      const f=hits.indexOf(1);mrr+=f>=0?1/(f+1):0;
+      const dcg=hits.slice(0,5).reduce((a,h,i)=>a+h/Math.log2(i+2),0);
+      let idcg=0;for(let i=0;i<Math.min(5,rel.size);i++)idcg+=1/Math.log2(i+2);
+      nd+=idcg?dcg/idcg:0;
+    });
+    const n=JUDGED.length;return{key,label,p5:p5/n,r10:r10/n,mrr:mrr/n,ndcg:nd/n,ms:ms/n};
+  });
+}
+function addJob(o){
+  const j={id:'J'+String(JOBS.length+1).padStart(3,'0'),title:o.title,company:o.company,loc:o.loc,type:o.type,lvl:o.lvl,fam:'admin',req:o.req,pref:o.pref||[],desc:o.desc,smin:o.smin||0,smax:o.smax||0,days:0,dl:30};
+  const v=cvec(j.title+' '+j.title+' '+j.desc,j.req.map(s=>[s,1.5]));let bi=0;v.forEach((x,i)=>{if(x>v[bi])bi=i});j.fam=CK[bi];
+  JOBS.push(j);build();return j;
+}
+function removeJob(id){const i=JOBS.findIndex(j=>j.id===id);if(i>=0){JOBS.splice(i,1);build()}}
+function addAlias(skill,alias){const s=SKM[skill];if(!s||!alias)return false;const a=alias.toLowerCase().trim();if(!a||s.al.includes(a))return false;s.al.push(a);build();return true}
+function addSkill(name,cat,aliases,c){if(SKM[name]||!name)return false;S(name,cat||'Lainnya',aliases||[],c||{admin:.2});build();return true}
+function extractSkills(t){return norm(t).found}
+function dupCheck(){
+  const sets=JOBS.map(j=>new Set(tokenize(norm(j.title+' '+j.desc).t)));const out=[];
+  for(let a=0;a<JOBS.length;a++)for(let b=a+1;b<JOBS.length;b++){
+    const A=JOBS[a],Bj=JOBS[b];let inter=0;sets[a].forEach(t=>{if(sets[b].has(t))inter++});const jac=inter/(sets[a].size+sets[b].size-inter||1);
+    if((A.title===Bj.title&&A.company===Bj.company)||jac>.8)out.push({a:A,b:Bj,jac});
+  }
+  return out;
+}
+function parseCSV(t){const rows=[];let r=[],f='',q=false;for(let i=0;i<t.length;i++){const c=t[i];if(q){if(c==='"'){if(t[i+1]==='"'){f+='"';i++}else q=false}else f+=c}else if(c==='"')q=true;else if(c===','){r.push(f);f=''}else if(c==='\n'||c==='\r'){if(c==='\r'&&t[i+1]==='\n')i++;r.push(f);f='';if(r.length>1||r[0]!=='')rows.push(r);r=[]}else f+=c}if(f!==''||r.length){r.push(f);rows.push(r)}return rows}
+function importCSV(text){
+  const rows=parseCSV(text);if(rows.length<2)return{added:0,skipped:0};
+  const h=rows[0].map(x=>x.trim().toLowerCase());const col=n=>h.indexOf(n);
+  const lvlOf=s=>{s=(s||'').toLowerCase();return /intern|magang/.test(s)?0:/senior/.test(s)?4:/mid/.test(s)?3:/junior/.test(s)?2:1};
+  const list=s=>(s||'').split(/[;,|]/).map(x=>x.trim()).filter(Boolean).map(x=>norm(x).found[0]||x);
+  let added=0,skipped=0;
+  rows.slice(1).forEach(r=>{const g=n=>col(n)>=0?(r[col(n)]||'').trim():'';const title=g('job_title');if(!title){skipped++;return}
+    const typ=g('employment_type');addJob({title,company:g('company')||'Tanpa nama',loc:g('location')||'Jakarta',type:TYPES.find(t=>t.toLowerCase()===typ.toLowerCase())||'Full-time',lvl:lvlOf(g('experience_level')),req:list(g('required_skills')),pref:list(g('preferred_skills')),desc:g('description')});added++});
+  return{added,skipped};
+}
+function stats(){
+  const fam={},lvl=[0,0,0,0,0],sk={},comp=new Set();
+  JOBS.forEach(j=>{fam[j.fam]=(fam[j.fam]||0)+1;lvl[j.lvl]++;comp.add(j.company);j.req.forEach(s=>sk[s]=(sk[s]||0)+1)});
+  return{n:JOBS.length,companies:comp.size,skills:SK.length,terms:IDX.post.size,avg:IDX.avg,fam,lvl,topSkills:Object.entries(sk).sort((a,b)=>b[1]-a[1]).slice(0,10)};
+}
+build();
+return{LEVELS,TYPES,LOCS,CONCEPTS,CK,SK,SKM,JOBS,JUDGED,METHODS,TODAY,understand,search,matchFor,evaluate,addJob,removeJob,addAlias,addSkill,extractSkills,dupCheck,importCSV,stats,cvec,retrieve};
+})();
+</script>
+
+<script id="ui">
+(function(){
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const ls={get(k,d){try{const v=localStorage.getItem(k);return v===null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const {LEVELS,TYPES,LOCS,CONCEPTS,CK,JOBS,TODAY}=TK;
+const EXAMPLES=[
+ 'Saya menguasai Python, SQL, Pandas, dan visualisasi data. Saya sedang mencari pekerjaan untuk fresh graduate di bidang analisis data.',
+ 'Saya suka mendesain tampilan aplikasi dan bisa memakai Figma. Mau magang di Jakarta.',
+ 'Saya ingin bekerja mengolah data dan membuat laporan bisnis.',
+ 'Bisa mengelola media sosial, menulis caption, dan membuat video pendek.'];
+const STATUSES=['Ingin dilamar','Sudah melamar','Wawancara','Ditolak'];
+const state={q:EXAMPLES[0],method:'hybrid',f:{loc:'',lvl:'',type:'',sal:0},sort:'match',useProf:false,tab:'ringkasan',view:'',lastCtx:null,drawerFrom:null,mode:'local',admOff:0};
+
+/* ---------- penyimpanan (dipisah per mode karena id lowongan berbeda) ---------- */
+let profile=ls.get('tk.profile',{nama:'Pencari Kerja',edu:'S1 Sistem Informasi',lvl:1,loc:'Jakarta',skills:['Python','SQL','Pandas','Microsoft Excel']});
+let log=ls.get('tk.log',[]);
+let saved=[],tracker=[],seedHidden=false;
+const K=n=>state.mode==='api'?n+'.api':n;
+function loadStores(){
+  saved=ls.get(K('tk.saved'),state.mode==='api'?null:['J001','J003','J002']);
+  tracker=ls.get(K('tk.tracker'),state.mode==='api'?null:[{id:'J001',st:'Ingin dilamar'},{id:'J003',st:'Sudah melamar'},{id:'J004',st:'Wawancara'}]);
+  seedHidden=ls.get(K('tk.seedhide'),false);
+}
+const persist=()=>{ls.set('tk.profile',profile);ls.set('tk.log',log);ls.set(K('tk.saved'),saved||[]);ls.set(K('tk.tracker'),tracker||[]);ls.set(K('tk.seedhide'),seedHidden)};
+
+/* ---------- sambungan ke API ---------- */
+const api={base:String(ls.get('tk.apiurl','http://127.0.0.1:8000')||'').replace(/\/+$/,''),token:ls.get('tk.token',''),user:ls.get('tk.user',''),exp:ls.get('tk.exp',0),info:null,meta:null,skills:null};
+async function call(path,o={}){
+  const ctl=new AbortController();const t=setTimeout(()=>ctl.abort(),o.timeout||10000);
+  try{
+    const h={};if(o.body!==undefined)h['Content-Type']='application/json';if(o.admin&&api.token)h['Authorization']='Bearer '+api.token;
+    const r=await fetch(api.base+path,{method:o.method||'GET',headers:h,body:o.body!==undefined?JSON.stringify(o.body):undefined,signal:ctl.signal});
+    if(!r.ok){let d='';try{d=(await r.json()).detail}catch(e){}const er=new Error(typeof d==='string'&&d?d:'HTTP '+r.status);er.status=r.status;throw er}
+    return r.status===204?null:await r.json();
+  }finally{clearTimeout(t)}
+}
+async function tryConnect(){
+  try{api.info=await call('/health',{timeout:1500});api.meta=await call('/meta',{timeout:4000});api.skills=null;return true}
+  catch(e){api.info=null;api.meta=null;return false}
+}
+const jobCache=new Map(),matchCache=new Map();
+const daysSince=d=>d?Math.max(0,Math.round((TODAY-new Date(d+'T00:00:00+07:00'))/864e5)):0;
+function jobFromApi(j){
+  return{id:j.job_id,title:j.job_title,company:j.company,loc:j.location,type:j.employment_type,lvl:Math.max(0,LEVELS.indexOf(j.experience_level)),fam:j.family||'',
+    req:j.required_skills||[],pref:j.preferred_skills||[],desc:j.description||'',smin:j.salary_min||0,smax:j.salary_max||0,days:daysSince(j.posted_at),
+    dl:j.deadline?Math.round((new Date(j.deadline+'T00:00:00+07:00')-TODAY)/864e5):30};
+}
+function mFromApi(job,m,skills){
+  const st=n=>({n,st:skills.includes(n)?'have':'miss'});
+  return{S:m.S,R:m.R,E:m.E,L:m.L,final:Math.round(m.score),req:job.req.map(st),pref:job.pref.map(st),missing:m.missing||[],explain:m.explanation||''};
+}
+const baseTitle=t=>t.replace(/^(Junior|Senior|Mid-level|Magang)\s+/,'').replace(/\s+(Intern|Internship|Associate)$/,'').replace(/\s+\(Fresh Graduate\)$/,'');
+const conceptsOf=items=>{const top=items.slice(0,10).filter(x=>x.job.fam);const c={};top.forEach(x=>c[x.job.fam]=(c[x.job.fam]||0)+1);return Object.entries(c).map(([k,n])=>[k,n/Math.max(1,top.length)]).filter(x=>CONCEPTS[x[0]]&&x[1]>=.15).sort((a,b)=>b[1]-a[1]).slice(0,3)};
+const rolesOf=items=>[...new Set(items.slice(0,10).map(x=>baseTitle(x.job.title)))].slice(0,3);
+const emptyU=()=>({skills:[],concepts:[],roles:[],level:null,empType:null,loc:null,empty:true});
+
+async function apiSearch(q,o){
+  const f=o.filters||{};
+  const body={query:q,method:o.method==='sem'?'semantic':(o.method||'hybrid'),
+    filters:{location:f.loc||null,experience_level:(f.lvl===''||f.lvl==null)?null:LEVELS[+f.lvl],employment_type:f.type||null,min_salary:f.sal||null},
+    user_skills:o.extraSkills||[],limit:o.limit||50};
+  const r=await call('/search',{method:'POST',body,timeout:15000});
+  const skills=r.understood.skills||[];const ctx=(o.ctx||'cari')+':';
+  const items=r.results.map(x=>{const job=jobFromApi(x);jobCache.set(job.id,job);const m=x.match?mFromApi(job,x.match,skills):null;if(m)matchCache.set(ctx+job.id,m);
+    return{job,m,ranks:{bm:x.match&&x.match.bm25_rank,sem:x.match&&x.match.semantic_rank}}});
+  if(o.sort==='new')items.sort((a,b)=>a.job.days-b.job.days);else if(o.sort==='sal')items.sort((a,b)=>b.job.smax-a.job.smax);
+  const empty=!q.trim();
+  return{u:{skills,level:r.understood.level,loc:r.understood.location,empType:r.understood.employment_type,concepts:empty?[]:conceptsOf(items),roles:empty?[]:rolesOf(items),empty},items,ms:r.took_ms,total:r.total};
+}
+function localSearch(q,o){const r=TK.search(q,{method:o.method,filters:o.filters,sort:o.sort,extraSkills:o.extraSkills});return{u:r.u,items:r.items,ms:r.ms,total:r.items.length}}
+async function eSearch(q,o){
+  if(state.mode==='api'){try{return await apiSearch(q,o)}catch(e){if(e.status)throw e;dropToLocal()}}
+  return localSearch(q,o);
+}
+function dropToLocal(){
+  state.mode='local';api.info=null;loadStores();updateChip('API tidak terjangkau. Kembali memakai mesin di browser.');initFilters();
+}
+const getJob=id=>state.mode==='local'?TK.JOBS.find(j=>j.id===id):jobCache.get(id);
+async function ensureJobs(ids){
+  if(state.mode!=='api')return;
+  await Promise.all(ids.filter(id=>!jobCache.has(id)).map(async id=>{try{jobCache.set(id,jobFromApi(await call('/jobs/'+encodeURIComponent(id))))}catch(e){}}));
+}
+async function extractSkills(text){
+  if(state.mode==='api'){try{return (await call('/extract-skills',{method:'POST',body:{text}})).skills}catch(e){if(e.status)return [];dropToLocal()}}
+  return TK.extractSkills(text);
+}
+async function skillNames(){
+  if(state.mode==='api'){
+    if(!api.skills){try{api.skills=await call('/skills')}catch(e){api.skills=[]}}
+    return api.skills.map(s=>s.skill_name);
+  }
+  return TK.SK.map(s=>s.n);
+}
+
+/* ---------- tampilan sambungan ---------- */
+function adminNote(){
+  if(!api.info)return '';
+  if(!api.info.admin_protected)return 'Peringatan: admin belum dikunci (belum ada akun admin di server).';
+  return api.token&&api.exp*1000>Date.now()?`Masuk sebagai ${api.user}.`:'Admin terkunci. Masuk untuk membuka tab admin.';
+}
+async function login(user,pw){
+  const r=await call('/auth/login',{method:'POST',body:{username:user,password:pw}});
+  api.token=r.token;api.user=r.username;api.exp=r.expires_at;ls.set('tk.token',api.token);ls.set('tk.user',api.user);ls.set('tk.exp',api.exp);
+}
+function logout(){api.token='';api.exp=0;ls.set('tk.token','');ls.set('tk.exp',0)}
+function updateChip(warn){
+  const on=state.mode==='api'&&api.info;
+  $('#eng-chip').classList.toggle('on',!!on);
+  $('#eng-label').textContent=on?'Mesin: API Python':'Mesin: browser';
+  $('#conn-url').value=api.base;$('#conn-user').value=api.user||'';$('#conn-pass').value='';
+  $('#conn-status').textContent=warn||(on?`Terhubung ke ${api.base}. ${api.info.jobs} lowongan, database ${api.info.database}, pencarian semantik: ${String(api.info.semantic_backend).toUpperCase()}. ${adminNote()}`:'Tidak terhubung ke API. Memakai mesin di browser dengan 41 lowongan demo.');
+  $('#foot-engine').textContent=on?'Pencarian dijalankan oleh API Python (BM25, semantik, RRF) pada dataset 368 lowongan sintetis.':'Pencarian berjalan seluruhnya di browser dengan 41 lowongan demo. BM25 dan embedding bidang berbasis kamus menggantikan SBERT.';
+}
+function chipsFor(m){return m.req.map(x=>chip(x,'req')).join('')+m.pref.map(x=>chip(x,'pref')).join('')}
+function chip(x,kind){const cls=x.st==='have'?'have':x.st==='rel'?'rel':'miss';const mark=x.st==='have'?'✓ ':x.st==='rel'?'≈ ':'';const t=x.st==='rel'?` title="Mirip dengan ${esc(x.via)}"`:'';return `<span class="chip ${cls}"${t}>${mark}${esc(x.n)}${kind==='pref'?'<small class="muted">&nbsp;+</small>':''}</span>`}
+const plainChips=j=>j.req.map(s=>`<span class="chip">${esc(s)}</span>`).join('');
+const fmtSal=j=>j.smax?('Rp '+j.smin+(j.smax!==j.smin?'–'+j.smax:'')+' jt'):'Gaji tidak dicantumkan';
+const ago=d=>d===0?'Hari ini':d===1?'Kemarin':d+' hari lalu';
+function ring(p){const r=26,c=2*Math.PI*r;return `<div class="ring" role="img" aria-label="Kecocokan ${p} persen"><svg width="68" height="68" viewBox="0 0 68 68" aria-hidden="true"><circle cx="34" cy="34" r="${r}" fill="none" stroke="var(--line)" stroke-width="6"/><circle cx="34" cy="34" r="${r}" fill="none" stroke="var(--accent)" stroke-width="6" stroke-linecap="round" stroke-dasharray="${(c*p/100).toFixed(1)} ${c.toFixed(1)}" transform="rotate(-90 34 34)"/></svg><b>${p}%</b></div>`}
+
+/* ---------- pemahaman kueri ---------- */
+function undHTML(u){
+  const sk=u.skills.length?`<div class="chips">${u.skills.map(s=>`<span class="chip have">${esc(s)}</span>`).join('')}</div>`:'<span class="muted">Belum ada skill yang dikenali</span>';
+  const mx=u.concepts.length?u.concepts[0][1]:1;
+  const cc=u.concepts.length?u.concepts.map(([k,v])=>`<div class="cbar"><span>${esc(CONCEPTS[k])}</span><i><b style="width:${Math.round(v/mx*100)}%"></b></i></div>`).join(''):'<span class="muted">Belum terbaca</span>';
+  const rl=u.roles.length?`<div class="chips">${u.roles.map(r=>`<span class="chip tag">${esc(r)}</span>`).join('')}</div>`:'<span class="muted">Belum terbaca</span>';
+  const n=v=>v==null?'<span class="muted">Tidak disebut</span>':esc(v);
+  return `<div><dt>Skill</dt><dd>${sk}</dd></div><div><dt>Bidang</dt><dd>${cc}</dd></div><div><dt>Peran terkait</dt><dd>${rl}</dd></div><div><dt>Level</dt><dd>${n(u.level==null?null:LEVELS[u.level])}</dd></div><div><dt>Lokasi</dt><dd>${n(u.loc)}</dd></div><div><dt>Jenis</dt><dd>${n(u.empType)}</dd></div>`;
+}
+let heroSeq=0;
+async function renderHero(){
+  const seq=++heroSeq;const q=$('#q-hero').value;let u;
+  if(state.mode==='api'){
+    if(!q.trim())u=emptyU();else{try{u=(await apiSearch(q,{limit:10,method:'hybrid',ctx:'hero'})).u}catch(e){if(!e.status)dropToLocal();u=state.mode==='local'?TK.understand(q):emptyU()}}
+  }else u=TK.understand(q);
+  if(seq!==heroSeq)return;
+  $('#und-hero').innerHTML=undHTML(u);
+}
+
+/* ---------- beranda ---------- */
+async function renderBeranda(){
+  $('#examples').innerHTML='<span class="small muted">Coba:</span>'+['Analisis data','Desain aplikasi','Laporan bisnis','Media sosial'].map((t,i)=>`<button type="button" data-ex="${i}">${t}</button>`).join('');
+  let cnt={},latest=[];
+  if(state.mode==='api'){try{cnt=(api.meta&&api.meta.families)||{};latest=(await apiSearch('',{limit:6,ctx:'beranda'})).items.map(x=>x.job)}catch(e){if(!e.status)dropToLocal()}}
+  if(state.mode==='local'){JOBS.forEach(j=>cnt[j.fam]=(cnt[j.fam]||0)+1);latest=[...JOBS].sort((a,b)=>a.days-b.days).slice(0,6)}
+  $('#cats').innerHTML=CK.filter(k=>cnt[k]).map(k=>`<button type="button" class="cat" data-cat="${k}"><span>${esc(CONCEPTS[k])}</span><span class="mono">${cnt[k]} lowongan</span></button>`).join('');
+  $('#latest').innerHTML=latest.map(j=>`<li><div><button class="link t" data-open="${j.id}">${esc(j.title)}</button><p class="meta">${esc(j.company)} · ${esc(j.loc)} · ${j.type} · ${LEVELS[j.lvl]}</p></div><div class="mono small muted">${fmtSal(j)} · ${ago(j.days)}</div></li>`).join('');
+}
+
+/* ---------- cari ---------- */
+function fillSelect(el,opts,val){el.innerHTML=opts.map(([v,t])=>`<option value="${esc(v)}"${String(v)===String(val)?' selected':''}>${esc(t)}</option>`).join('')}
+const locList=()=>state.mode==='api'&&api.meta?api.meta.locations:LOCS;
+function initFilters(){
+  fillSelect($('#f-loc'),[['','Semua lokasi'],...locList().map(l=>[l,l])],state.f.loc);
+  fillSelect($('#f-lvl'),[['','Semua level'],...LEVELS.map((l,i)=>[i,l])],state.f.lvl);
+  fillSelect($('#f-type'),[['','Semua jenis'],...TYPES.map(l=>[l,l])],state.f.type);
+}
+let searchSeq=0;
+async function runSearch(logIt){
+  const seq=++searchSeq;
+  const extra=state.useProf?profile.skills:[];
+  let r;
+  try{r=await eSearch(state.q,{method:state.method,filters:state.f,sort:state.sort,extraSkills:extra,ctx:'cari'})}
+  catch(e){if(seq===searchSeq)$('#results').innerHTML=`<li class="empty">Pencarian gagal: ${esc(e.message)}</li>`;return}
+  if(seq!==searchSeq)return;
+  const u=r.u;
+  if(state.mode==='local')state.lastCtx={skills:u.skills,level:u.level,loc:u.loc,empType:u.empType,qv:u.qv};
+  if(logIt&&state.q.trim()){log.unshift({q:state.q,skills:u.skills,n:r.total,t:Date.now()});log=log.slice(0,50);persist()}
+  $('#und-line').innerHTML=u.empty?'':('<span class="eyebrow">Terbaca</span>'+u.skills.map(s=>`<span class="chip have">${esc(s)}</span>`).join('')+u.concepts.map(([k])=>`<span class="chip tag">${esc(CONCEPTS[k])}</span>`).join('')+(u.level!=null?`<span class="chip tag">${LEVELS[u.level]}</span>`:'')+(u.loc?`<span class="chip tag">${esc(u.loc)}</span>`:'')+(u.empType?`<span class="chip tag">${esc(u.empType)}</span>`+(state.f.type===u.empType?'':`<button type="button" class="btn sm" data-onlytype="${esc(u.empType)}">Hanya ${esc(u.empType)}</button>`):''));
+  $('#count').textContent=u.empty?`${r.total} lowongan terbaru. Tulis kemampuanmu di atas untuk melihat skor kecocokan.`:`${r.total} lowongan ditemukan`;
+  $('#latency').textContent=`${r.ms.toFixed(1)} ms · ${state.mode==='api'?'API':'browser'}`;
+  if(!r.items.length){$('#results').innerHTML='<li class="empty">Tidak ada lowongan yang cocok. Coba longgarkan filter, atau ceritakan kemampuanmu dengan kalimat yang lebih lengkap.</li>';return}
+  $('#results').innerHTML=r.items.slice(0,25).map(resHTML).join('');
+}
+function resHTML(r){
+  const j=r.job,m=r.m,sv=(saved||[]).includes(j.id);
+  const ranks=m?`<p class="ranks mono">BM25 ${r.ranks.bm?'#'+r.ranks.bm:'tidak ditemukan'} · Makna ${r.ranks.sem?'#'+r.ranks.sem:'tidak ditemukan'}</p>`:'';
+  const miss=m&&m.missing.length?`<p class="gap">Skill belum dimiliki: ${m.missing.map(esc).join(', ')}</p>`:'';
+  return `<li class="res"><div style="min-width:0"><h3><button class="link" data-open="${j.id}">${esc(j.title)}</button></h3><p class="meta" style="margin-top:4px">${esc(j.company)} · ${esc(j.loc)} · ${j.type} · ${LEVELS[j.lvl]}</p><p class="meta mono" style="margin-top:2px;font-size:12px">${fmtSal(j)} · ${ago(j.days)}</p><div class="chips">${m?chipsFor(m):plainChips(j)}</div>${m?`<p class="why">${esc(m.explain)}</p>`:''}${miss}${ranks}</div><div class="res-side">${m?ring(m.final):''}<button class="btn sm" type="button" data-save="${j.id}" aria-pressed="${sv}">${sv?'Tersimpan':'Simpan'}</button></div></li>`;
+}
+
+/* ---------- detail ---------- */
+function profCtx(){return{skills:profile.skills,level:profile.lvl,loc:profile.loc||null,empType:null,qv:TK.cvec('',profile.skills.map(s=>[s,1.5]))}}
+async function openJob(id,from){
+  state.drawerFrom=from||document.activeElement;
+  let j=getJob(id);
+  if(!j&&state.mode==='api'){await ensureJobs([id]);j=getJob(id)}
+  if(!j)return;
+  let m;
+  if(state.mode==='local'){m=TK.matchFor(j,state.lastCtx&&state.view==='cari'?state.lastCtx:profCtx())}
+  else{
+    const key=(state.view==='cari'?'cari:':'dasbor:')+id;m=matchCache.get(key);
+    if(!m){
+      try{const qs=new URLSearchParams();qs.set('level',profile.lvl);if(profile.loc)qs.set('location',profile.loc);
+        m=mFromApi(j,await call(`/jobs/${encodeURIComponent(id)}/match?`+qs,{method:'POST',body:profile.skills}),profile.skills);matchCache.set(key,m)}
+      catch(e){return}
+    }
+  }
+  const sv=(saved||[]).includes(id);const tr=(tracker||[]).find(t=>t.id===id);
+  const row=(l,v)=>`<div><span>${l}</span><i><b style="width:${v}%"></b></i><span class="mono">${v}</span></div>`;
+  const dl=new Date(TODAY.getTime()+j.dl*864e5).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'});
+  $('#drawer').innerHTML=`<div class="dh"><div style="min-width:0"><p class="eyebrow">${esc(j.company)}</p><h2 style="margin-top:8px">${esc(j.title)}</h2><p class="meta" style="margin-top:6px">${esc(j.loc)} · ${j.type} · ${LEVELS[j.lvl]}</p></div><button class="icon-btn" type="button" data-close aria-label="Tutup detail">✕</button></div>
+  <div class="split">${ring(m.final)}<p class="small muted">Skor ini perkiraan kesesuaian berdasarkan kriteria sistem, bukan peluang diterima kerja.</p></div>
+  <div class="brk">${row('Skill (40%)',m.S)}${row('Relevansi (30%)',m.R)}${row('Pengalaman (20%)',m.E)}${row('Lokasi (10%)',m.L)}</div>
+  <p class="formula">0,40×${m.S} + 0,30×${m.R} + 0,20×${m.E} + 0,10×${m.L} = ${m.final}</p>
+  <div><h3 style="font-size:16px">Mengapa direkomendasikan</h3><p style="margin-top:6px">${esc(m.explain)}</p></div>
+  <div><h3 style="font-size:16px">Skill wajib</h3><div class="chips" style="margin-top:8px">${m.req.map(x=>chip(x,'req')).join('')||'<span class="muted">Tidak dicantumkan</span>'}</div>
+  ${m.pref.length?`<h3 style="font-size:16px;margin-top:14px">Nilai tambah</h3><div class="chips" style="margin-top:8px">${m.pref.map(x=>chip(x,'req')).join('')}</div>`:''}
+  <p class="small muted" style="margin-top:10px">✓ sudah dimiliki${state.mode==='local'?' · ≈ mirip dengan skill yang dimiliki':''} · garis putus belum dimiliki</p></div>
+  <div><h3 style="font-size:16px">Deskripsi pekerjaan</h3><p style="margin-top:6px">${esc(j.desc)}</p></div>
+  <dl class="facts"><div><dt>Gaji</dt><dd>${fmtSal(j)}</dd></div><div><dt>Diposting</dt><dd>${ago(j.days)}</dd></div><div><dt>Tenggat</dt><dd>${dl}</dd></div><div><dt>Sumber</dt><dd>${state.mode==='api'?'Dataset sintetis (API)':'Data sintetis demo'}</dd></div></dl>
+  <div class="d-actions"><button class="btn" type="button" data-save="${id}" aria-pressed="${sv}">${sv?'Tersimpan':'Simpan'}</button>
+  <div class="field" style="grid-template-columns:auto 1fr;align-items:center;display:grid;gap:8px"><label for="d-st" class="small">Catat di pelacak</label><select id="d-st" data-track="${id}"><option value="">Belum dicatat</option>${STATUSES.map(s=>`<option${tr&&tr.st===s?' selected':''}>${s}</option>`).join('')}</select></div></div>`;
+  $('#veil').hidden=false;$('#drawer').hidden=false;$('#drawer').scrollTop=0;$('#drawer [data-close]').focus();
+}
+function closeDrawer(){if($('#drawer').hidden)return;$('#drawer').hidden=true;$('#veil').hidden=true;if(state.drawerFrom&&state.drawerFrom.focus)try{state.drawerFrom.focus()}catch(e){}}
+
+/* ---------- dasbor ---------- */
+let dashSeq=0;
+async function addSkillToProfile(raw){
+  const found=await extractSkills(raw);const added=found.filter(s=>!profile.skills.includes(s));
+  profile.skills.push(...added);persist();return{found,added};
+}
+async function renderDasbor(){
+  const seq=++dashSeq;
+  $('#p-nama').value=profile.nama;$('#p-edu').value=profile.edu;
+  fillSelect($('#p-lvl'),LEVELS.map((l,i)=>[i,l]),profile.lvl);
+  fillSelect($('#p-loc'),[['','Semua lokasi'],...locList().map(l=>[l,l])],profile.loc);
+  $('#p-skills').innerHTML=profile.skills.length?profile.skills.map(s=>`<span class="chip have">${esc(s)}<button type="button" data-rm="${esc(s)}" aria-label="Hapus ${esc(s)}">×</button></span>`).join(''):'<span class="muted small">Belum ada skill. Tambahkan di bawah atau baca dari CV.</span>';
+  skillNames().then(n=>{if(seq===dashSeq)$('#skill-list').innerHTML=n.map(s=>`<option value="${esc(s)}">`).join('')});
+  const words=['magang','fresh graduate','junior','berpengalaman 4 tahun','senior'][profile.lvl];
+  const q=profile.skills.length?`Saya menguasai ${profile.skills.join(', ')}. ${words}. ${profile.loc||''}`:'';
+  let r=null;
+  if(q){try{r=await eSearch(q,{method:'hybrid',filters:{},sort:'match',extraSkills:state.mode==='api'?profile.skills:[],ctx:'dasbor',limit:10})}catch(e){}}
+  if(seq!==dashSeq)return;
+  const top=r&&!r.u.empty?r.items.slice(0,10):[];
+  if(state.mode==='api'&&saved===null){
+    const ids=top.slice(0,3).map(x=>x.job.id);saved=ids;tracker=ids.map((id,i)=>({id,st:STATUSES[i]}));persist();
+  }
+  saved=saved||[];tracker=tracker||[];
+  $('#seed-note').innerHTML=seedHidden?'':'<div class="banner"><span>Lowongan tersimpan dan pelacak di bawah adalah contoh awal. Ubah sesuai keadaanmu.</span><button class="btn sm" type="button" id="seed-x">Sembunyikan</button></div>';
+  $('#rec').innerHTML=top.length?top.slice(0,5).map(x=>`<li><div style="min-width:0"><button class="link t" data-open="${x.job.id}" style="font-weight:600">${esc(x.job.title)}</button><p class="meta">${esc(x.job.company)} · ${esc(x.job.loc)} · ${x.job.type}</p><p class="small muted" style="margin-top:2px">${x.m.missing.length?'Belum dimiliki: '+x.m.missing.slice(0,3).map(esc).join(', '):'Semua skill wajib sudah kamu miliki'}</p></div><span class="mono">${x.m.final}%</span></li>`).join(''):'<li class="muted small" style="padding:12px 0">Tambahkan skill untuk melihat rekomendasi.</li>';
+  const cnt={};top.forEach(x=>x.m.missing.forEach(s=>cnt[s]=(cnt[s]||0)+1));
+  const g=Object.entries(cnt).sort((a,b)=>b[1]-a[1]).slice(0,6);
+  $('#gap').innerHTML=g.length?g.map(([s,n])=>`<div class="gapbar"><span>${esc(s)}</span><i><b style="width:${n/Math.max(1,top.length)*100}%"></b></i><span class="mono">${n}/${top.length}</span></div>`).join(''):'<p class="muted small" style="margin-top:12px">Tidak ada skill yang kurang pada rekomendasi teratas.</p>';
+  await ensureJobs([...new Set([...saved,...tracker.map(t=>t.id)])]);
+  if(seq!==dashSeq)return;
+  $('#kanban').innerHTML=STATUSES.map(s=>{const cs=tracker.filter(t=>t.st===s&&getJob(t.id));return `<div class="col"><h3><span>${s}</span><span class="mono">${cs.length}</span></h3>${cs.map(t=>{const j=getJob(t.id);return `<div class="kcard"><button class="link" data-open="${j.id}" style="font-weight:600">${esc(j.title)}</button><span class="muted small">${esc(j.company)}</span><select data-track="${j.id}" aria-label="Status ${esc(j.title)}">${STATUSES.map(x=>`<option${x===s?' selected':''}>${x}</option>`).join('')}<option value="">Hapus dari pelacak</option></select></div>`}).join('')||'<span class="small muted">Kosong</span>'}</div>`}).join('');
+  const sv=saved.map(getJob).filter(Boolean);
+  $('#saved').innerHTML=sv.length?sv.map(j=>`<li><div style="min-width:0"><button class="link t" data-open="${j.id}" style="font-weight:600">${esc(j.title)}</button><p class="meta">${esc(j.company)} · ${esc(j.loc)} · ${fmtSal(j)}</p></div><button class="btn sm" data-save="${j.id}" aria-pressed="true">Hapus</button></li>`).join(''):'<li class="muted small" style="padding:12px 0">Belum ada lowongan tersimpan. Tekan Simpan pada hasil pencarian.</li>';
+}
+
+/* ---------- admin ---------- */
+const bar=(label,v,max)=>`<div class="hb"><span>${esc(label)}</span><i><b style="width:${Math.round(v/Math.max(1,max)*100)}%"></b></i><span class="mono">${v}</span></div>`;
+const entries=o=>Object.entries(o||{});
+function adminErr(e){
+  if(e.status===401)return `<section class="panel"><h2>Perlu masuk sebagai admin</h2><p class="muted" style="margin-top:8px">Masuk dengan akun admin di panel Sambungan (tombol Mesin di pojok kanan atas), lalu buka tab ini lagi. Sesi berlaku 12 jam.</p></section>`;
+  return `<section class="panel"><h2>Permintaan ke API gagal</h2><p class="muted" style="margin-top:8px">${esc(e.message)}</p></section>`;
+}
+let admSeq=0;
+async function renderAdmin(){
+  const seq=++admSeq;
+  $$('#tabs button').forEach(b=>b.setAttribute('aria-selected',b.dataset.tab===state.tab));
+  const el=$('#adm-body');
+  if(state.mode==='api'){
+    el.innerHTML='<p class="muted">Memuat dari API…</p>';
+    let html;
+    try{html=await adminApiHTML()}catch(e){if(!e.status){dropToLocal();if(seq===admSeq)renderAdmin();return}html=adminErr(e)}
+    if(seq===admSeq)el.innerHTML=html;
+    return;
+  }
+  el.innerHTML=adminLocalHTML();
+}
+async function adminApiHTML(){
+  const note=`<p class="msg">Terhubung ke API. Lowongan yang ditambah atau dihapus berlaku sampai server dimatikan, dan indeks dibangun ulang otomatis.</p>`;
+  if(state.tab==='ringkasan'){
+    const st=await call('/admin/stats',{admin:true});
+    const lv=LEVELS.map(l=>[l,(st.by_level||{})[l]||0]);const locs=entries(st.by_location).sort((a,b)=>b[1]-a[1]);const top=entries(st.top_required_skills);
+    return note+`<section class="panel"><h2>Ringkasan data</h2><dl class="defs" style="margin-top:14px"><div><dt>Lowongan</dt><dd class="mono">${st.jobs}</dd></div><div><dt>Perusahaan</dt><dd class="mono">${st.companies}</dd></div><div><dt>Skill di kamus</dt><dd class="mono">${st.skills_in_dictionary}</dd></div><div><dt>Term terindeks</dt><dd class="mono">${st.indexed_terms}</dd></div><div><dt>Rata-rata term per lowongan</dt><dd class="mono">${st.avg_tokens_per_job}</dd></div><div><dt>Pencarian semantik</dt><dd class="mono">${esc(String(st.semantic_backend).toUpperCase())}</dd></div></dl></section>
+    <div class="two"><section class="panel"><h2>Lowongan per level</h2>${lv.map(([k,v])=>bar(k,v,Math.max(...lv.map(x=>x[1])))).join('')}</section><section class="panel"><h2>Lowongan per lokasi</h2>${locs.map(([k,v])=>bar(k,v,locs[0][1])).join('')}</section></div>
+    <section class="panel"><h2>Skill wajib terbanyak</h2>${top.map(([k,v])=>bar(k,v,top[0][1])).join('')}</section>`;
+  }
+  if(state.tab==='lowongan'){
+    const L=30,r=await call(`/jobs?limit=${L}&offset=${state.admOff}`);
+    return note+`<section class="panel"><h2>Tambah lowongan</h2><form id="job-form" style="margin-top:14px;display:grid;gap:14px"><div class="inline-form">
+    <div class="field"><label for="a-title">Judul</label><input type="text" id="a-title" required></div>
+    <div class="field"><label for="a-comp">Perusahaan</label><input type="text" id="a-comp" required></div>
+    <div class="field"><label for="a-loc">Lokasi</label><select id="a-loc">${locList().map(l=>`<option>${l}</option>`).join('')}</select></div>
+    <div class="field"><label for="a-type">Jenis</label><select id="a-type">${TYPES.map(l=>`<option>${l}</option>`).join('')}</select></div>
+    <div class="field"><label for="a-lvl">Level</label><select id="a-lvl">${LEVELS.map((l,i)=>`<option value="${i}"${i===1?' selected':''}>${l}</option>`).join('')}</select></div>
+    <div class="field"><label for="a-req">Skill wajib (pisahkan koma, boleh kosong)</label><input type="text" id="a-req" placeholder="Python, SQL"></div></div>
+    <div class="field"><label for="a-desc">Deskripsi</label><textarea id="a-desc" rows="3" required></textarea></div>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="btn primary" type="submit">Tambah dan bangun ulang indeks</button><span class="small muted" id="a-msg" aria-live="polite"></span></div></form></section>
+    <section class="panel"><h2>Impor CSV</h2><p class="muted small" style="margin-top:6px">Pada mode API, dataset dimuat server dari <span class="mono">dataset/jobs.csv</span> saat start. Untuk mengganti data, ubah berkas itu atau jalankan <span class="mono">generate_dataset.py</span>, lalu mulai ulang server. Impor lewat browser tersedia pada mode browser.</p></section>
+    <section><div style="display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px"><h2 style="font-size:20px">Lowongan ${state.admOff+1} sampai ${Math.min(state.admOff+L,r.total)} dari ${r.total}</h2><div style="display:flex;gap:8px"><button class="btn sm" data-adm-page="prev" ${state.admOff===0?'disabled':''}>Sebelumnya</button><button class="btn sm" data-adm-page="next" ${state.admOff+L>=r.total?'disabled':''}>Berikutnya</button></div></div>
+    <div class="tw"><table><thead><tr><th>ID</th><th>Judul</th><th>Perusahaan</th><th>Lokasi</th><th>Level</th><th>Jenis</th><th class="num">Skill</th><th></th></tr></thead><tbody>${r.items.map(x=>`<tr><td class="mono">${esc(x.job_id)}</td><td>${esc(x.job_title)}</td><td>${esc(x.company)}</td><td>${esc(x.location)}</td><td>${esc(x.experience_level)}</td><td>${esc(x.employment_type)}</td><td class="num">${x.required_skills.length+x.preferred_skills.length}</td><td><button class="btn sm" data-del="${esc(x.job_id)}" aria-label="Hapus ${esc(x.job_title)}">Hapus</button></td></tr>`).join('')}</tbody></table></div></section>`;
+  }
+  if(state.tab==='skill'){
+    const sk=await call('/skills');api.skills=sk;
+    const cats=[...new Set(sk.map(s=>s.category))].sort();
+    return note+`<section class="panel"><h2>Tambah alias atau skill</h2><p class="muted small" style="margin-top:6px">Alias menyamakan variasi tulisan ke satu nama baku. Perubahan disimpan di database dan indeks dibangun ulang agar langsung berlaku.</p>
+    <form id="alias-form" class="inline-form" style="margin-top:14px"><div class="field"><label for="al-skill">Skill</label><select id="al-skill">${sk.map(s=>`<option>${esc(s.skill_name)}</option>`).join('')}</select></div><div class="field"><label for="al-new">Alias baru</label><input type="text" id="al-new" required placeholder="Contoh: lembar kerja"></div><button class="btn primary" type="submit">Tambah alias</button></form>
+    <form id="skill-form" class="inline-form" style="margin-top:14px"><div class="field"><label for="sk-name">Skill baru</label><input type="text" id="sk-name" required placeholder="Contoh: Prometheus"></div><div class="field"><label for="sk-al">Alias (pisahkan koma)</label><input type="text" id="sk-al"></div><div class="field"><label for="sk-c">Kategori</label><select id="sk-c">${cats.map(c=>`<option>${esc(c)}</option>`).join('')}</select></div><button class="btn" type="submit">Tambah skill</button></form>
+    <p class="msg" id="sk-msg" style="margin-top:12px" hidden aria-live="polite"></p></section><div class="tw"><table><thead><tr><th>Skill baku</th><th>Kategori</th><th>Alias</th></tr></thead><tbody>${sk.map(s=>`<tr><td><b>${esc(s.skill_name)}</b></td><td>${esc(s.category)}</td><td class="small">${s.aliases.map(esc).join(', ')||'<span class="muted">Tidak ada</span>'}</td></tr>`).join('')}</tbody></table></div>`;
+  }
+  if(state.tab==='aktivitas')return activityHTML();
+  const ev=await call('/admin/evaluate',{admin:true,timeout:60000});
+  const L=[['exact','E1 Kata persis'],['tfidf','E2 TF-IDF + cosine'],['bm25','E3 BM25'],['semantic','E4 Semantik ('+String(api.info?api.info.semantic_backend:'').toUpperCase()+')'],['hybrid','E5 BM25 + semantik (RRF)']];
+  const best=Math.max(...L.map(([k])=>ev[k]['NDCG@5']));
+  return note+`<section class="panel"><h2>Evaluasi mesin pencarian</h2><p class="muted small" style="margin-top:6px;max-width:72ch">Lima metode diuji pada 30 kueri yang sama dengan <span class="mono">qrels.csv</span>. Penilaian relevansi dibuat otomatis dari label bidang pada data sintetis, bukan oleh penilai manusia, dan selisih kecil antar metode belum tentu bermakna.</p>
+  <div class="tw" style="margin-top:14px"><table><thead><tr><th>Metode</th><th class="num">P@5</th><th class="num">Recall@10</th><th class="num">MRR@10</th><th class="num">NDCG@5</th><th class="num">Latensi</th></tr></thead><tbody>${L.map(([k,n])=>{const e=ev[k];return `<tr${e['NDCG@5']===best?' class="best"':''}><td><b>${esc(n)}</b></td><td class="num">${e['P@5'].toFixed(2)}</td><td class="num">${e['Recall@10'].toFixed(2)}</td><td class="num">${e['MRR@10'].toFixed(2)}</td><td class="num">${e['NDCG@5'].toFixed(2)}</td><td class="num">${e.ms_per_query.toFixed(2)} ms</td></tr>`}).join('')}</tbody></table></div>
+  <div style="margin-top:18px"><h3 style="font-size:16px">NDCG@5 per metode</h3>${L.map(([k,n])=>`<div class="hb" style="grid-template-columns:190px minmax(0,1fr) 40px"><span>${esc(n)}</span><i><b style="width:${Math.round(ev[k]['NDCG@5']*100)}%"></b></i><span class="mono">${ev[k]['NDCG@5'].toFixed(2)}</span></div>`).join('')}</div></section>`;
+}
+function activityHTML(){
+  const cnt={};log.forEach(l=>l.skills.forEach(s=>cnt[s]=(cnt[s]||0)+1));const top=Object.entries(cnt).sort((a,b)=>b[1]-a[1]).slice(0,8);
+  return log.length?`<div class="two"><section class="panel"><h2>Skill yang paling sering dicari</h2>${top.length?top.map(([s,v])=>bar(s,v,top[0][1])).join(''):'<p class="muted small" style="margin-top:10px">Belum ada skill terdeteksi pada pencarian.</p>'}</section><section class="panel"><h2>Ringkasan</h2><dl class="defs" style="margin-top:14px"><div><dt>Pencarian tercatat</dt><dd class="mono">${log.length}</dd></div><div><dt>Tanpa hasil</dt><dd class="mono">${log.filter(l=>!l.n).length}</dd></div></dl></section></div><div class="tw"><table><thead><tr><th>Waktu</th><th>Kueri</th><th>Skill terbaca</th><th class="num">Hasil</th></tr></thead><tbody>${log.map(l=>`<tr><td class="mono small">${new Date(l.t).toLocaleString('id-ID',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})}</td><td>${esc(l.q.length>90?l.q.slice(0,90)+'…':l.q)}</td><td class="small">${l.skills.map(esc).join(', ')||'-'}</td><td class="num">${l.n}</td></tr>`).join('')}</tbody></table></div>`
+  :`<section class="panel"><h2>Aktivitas pencarian</h2><p class="muted" style="margin-top:8px">Belum ada pencarian tercatat. Jalankan pencarian dari beranda atau halaman Cari Lowongan, lalu kembali ke sini.</p></section>`;
+}
+function adminLocalHTML(){
+  const st=TK.stats();
+  if(state.tab==='ringkasan'){
+    const fm=Object.entries(st.fam).sort((a,b)=>b[1]-a[1]);const dups=TK.dupCheck();
+    return `<section class="panel"><h2>Ringkasan data</h2><dl class="defs" style="margin-top:14px"><div><dt>Lowongan</dt><dd class="mono">${st.n}</dd></div><div><dt>Perusahaan</dt><dd class="mono">${st.companies}</dd></div><div><dt>Skill di kamus</dt><dd class="mono">${st.skills}</dd></div><div><dt>Term terindeks</dt><dd class="mono">${st.terms}</dd></div><div><dt>Rata-rata term per lowongan</dt><dd class="mono">${st.avg.toFixed(1)}</dd></div></dl></section>
+    <div class="two"><section class="panel"><h2>Lowongan per bidang</h2>${fm.map(([k,v])=>bar(CONCEPTS[k],v,fm[0][1])).join('')}</section>
+    <div class="stack"><section class="panel"><h2>Lowongan per level</h2>${st.lvl.map((v,i)=>bar(LEVELS[i],v,Math.max(...st.lvl))).join('')}</section>
+    <section class="panel"><h2>Skill wajib terbanyak</h2>${st.topSkills.map(([s,v])=>bar(s,v,st.topSkills[0][1])).join('')}</section></div></div>
+    <section class="panel"><h2>Pemeriksaan duplikat</h2><p class="muted small" style="margin-top:6px">Membandingkan judul, perusahaan, dan kemiripan teks antar lowongan.</p>${dups.length?`<div class="tw" style="margin-top:12px"><table><thead><tr><th>Lowongan A</th><th>Lowongan B</th><th class="num">Kemiripan</th></tr></thead><tbody>${dups.map(d=>`<tr><td>${esc(d.a.title)} · ${esc(d.a.company)}</td><td>${esc(d.b.title)} · ${esc(d.b.company)}</td><td class="num">${Math.round(d.jac*100)}%</td></tr>`).join('')}</tbody></table></div>`:'<p class="msg" style="margin-top:12px">Tidak ada lowongan yang terindikasi duplikat.</p>'}</section>`;
+  }
+  if(state.tab==='lowongan'){
+    return `<section class="panel"><h2>Tambah lowongan</h2><form id="job-form" style="margin-top:14px;display:grid;gap:14px"><div class="inline-form">
+    <div class="field"><label for="a-title">Judul</label><input type="text" id="a-title" required></div>
+    <div class="field"><label for="a-comp">Perusahaan</label><input type="text" id="a-comp" required></div>
+    <div class="field"><label for="a-loc">Lokasi</label><select id="a-loc">${LOCS.map(l=>`<option>${l}</option>`).join('')}</select></div>
+    <div class="field"><label for="a-type">Jenis</label><select id="a-type">${TYPES.map(l=>`<option>${l}</option>`).join('')}</select></div>
+    <div class="field"><label for="a-lvl">Level</label><select id="a-lvl">${LEVELS.map((l,i)=>`<option value="${i}"${i===1?' selected':''}>${l}</option>`).join('')}</select></div>
+    <div class="field"><label for="a-req">Skill wajib (pisahkan koma)</label><input type="text" id="a-req" placeholder="Python, SQL"></div></div>
+    <div class="field"><label for="a-desc">Deskripsi</label><textarea id="a-desc" rows="3" required></textarea></div>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="btn primary" type="submit">Tambah dan bangun ulang indeks</button><span class="small muted" id="a-msg" aria-live="polite"></span></div></form></section>
+    <section class="panel"><h2>Impor CSV</h2><p class="muted small" style="margin-top:6px">Kolom yang dibaca: <span class="mono">job_title, company, description, required_skills, preferred_skills, experience_level, location, employment_type</span>. Skill dipisah titik koma.</p>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px"><input type="file" id="csv-file" accept=".csv,text/csv" aria-label="Pilih berkas CSV"><button class="btn sm" type="button" id="csv-copy">Salin header CSV</button><span class="small muted" id="csv-msg" aria-live="polite"></span></div></section>
+    <section><h2 style="font-size:20px;margin-bottom:12px">Semua lowongan (${JOBS.length})</h2><div class="tw"><table><thead><tr><th>ID</th><th>Judul</th><th>Perusahaan</th><th>Lokasi</th><th>Level</th><th>Jenis</th><th class="num">Skill</th><th></th></tr></thead><tbody>${JOBS.map(j=>`<tr><td class="mono">${j.id}</td><td>${esc(j.title)}</td><td>${esc(j.company)}</td><td>${esc(j.loc)}</td><td>${LEVELS[j.lvl]}</td><td>${j.type}</td><td class="num">${j.req.length+j.pref.length}</td><td><button class="btn sm" data-del="${j.id}" aria-label="Hapus ${esc(j.title)}">Hapus</button></td></tr>`).join('')}</tbody></table></div></section>`;
+  }
+  if(state.tab==='skill'){
+    return `<section class="panel"><h2>Tambah alias atau skill</h2><p class="muted small" style="margin-top:6px">Alias menyamakan variasi tulisan ke satu nama baku, misalnya "ms excel" ke Microsoft Excel.</p>
+    <form id="alias-form" class="inline-form" style="margin-top:14px"><div class="field"><label for="al-skill">Skill</label><select id="al-skill">${TK.SK.map(s=>`<option>${esc(s.n)}</option>`).join('')}</select></div><div class="field"><label for="al-new">Alias baru</label><input type="text" id="al-new" required placeholder="Contoh: lembar kerja"></div><button class="btn primary" type="submit">Tambah alias</button></form>
+    <form id="skill-form" class="inline-form" style="margin-top:14px"><div class="field"><label for="sk-name">Skill baru</label><input type="text" id="sk-name" required placeholder="Contoh: Prometheus"></div><div class="field"><label for="sk-al">Alias (pisahkan koma)</label><input type="text" id="sk-al"></div><div class="field"><label for="sk-c">Bidang terkait</label><select id="sk-c">${CK.map(k=>`<option value="${k}">${esc(CONCEPTS[k])}</option>`).join('')}</select></div><button class="btn" type="submit">Tambah skill</button></form>
+    <p class="msg" id="sk-msg" style="margin-top:12px" hidden aria-live="polite"></p></section>
+    <div class="tw"><table><thead><tr><th>Skill baku</th><th>Kategori</th><th>Alias</th></tr></thead><tbody>${TK.SK.map(s=>`<tr><td><b>${esc(s.n)}</b></td><td>${esc(s.cat)}</td><td class="small">${s.al.filter(a=>a!==s.n.toLowerCase()).map(esc).join(', ')||'<span class="muted">Tidak ada</span>'}</td></tr>`).join('')}</tbody></table></div>`;
+  }
+  if(state.tab==='aktivitas')return activityHTML();
+  const ev=TK.evaluate();const best=Math.max(...ev.map(e=>e.ndcg));
+  return `<section class="panel"><h2>Evaluasi mesin pencarian</h2><p class="muted small" style="margin-top:6px;max-width:72ch">Lima metode diuji pada ${TK.JUDGED.length} kueri yang sama. Sebuah lowongan dianggap relevan bila bidangnya sesuai dengan maksud kueri. Penilaian ini berasal dari pengelompokan data sintetis, bukan dari penilai manusia, jadi gunakan sebagai gambaran dan ganti dengan penilaian manusia untuk laporan resmi.</p>
+  <div class="tw" style="margin-top:14px"><table><thead><tr><th>Metode</th><th class="num">P@5</th><th class="num">Recall@10</th><th class="num">MRR@10</th><th class="num">NDCG@5</th><th class="num">Latensi</th></tr></thead><tbody>${ev.map(e=>`<tr${e.ndcg===best?' class="best"':''}><td><b>${esc(e.label)}</b></td><td class="num">${e.p5.toFixed(2)}</td><td class="num">${e.r10.toFixed(2)}</td><td class="num">${e.mrr.toFixed(2)}</td><td class="num">${e.ndcg.toFixed(2)}</td><td class="num">${e.ms.toFixed(2)} ms</td></tr>`).join('')}</tbody></table></div>
+  <div style="margin-top:18px"><h3 style="font-size:16px">NDCG@5 per metode</h3>${ev.map(e=>`<div class="hb" style="grid-template-columns:190px minmax(0,1fr) 40px"><span>${esc(e.label)}</span><i><b style="width:${Math.round(e.ndcg*100)}%"></b></i><span class="mono">${e.ndcg.toFixed(2)}</span></div>`).join('')}</div></section>
+  <section class="panel"><h2>Kueri uji</h2><div class="tw" style="margin-top:12px"><table><thead><tr><th>Kueri</th><th>Bidang relevan</th></tr></thead><tbody>${TK.JUDGED.map(([q,f])=>`<tr><td>${esc(q)}</td><td>${f.map(k=>esc(CONCEPTS[k])).join(', ')}</td></tr>`).join('')}</tbody></table></div></section>`;
+}
+
+/* ---------- router ---------- */
+const VIEWS=['beranda','cari','dasbor','admin'];
+function route(){
+  const h=(location.hash||'#beranda').slice(1);const v=VIEWS.includes(h)?h:'beranda';
+  const changed=state.view!==v;state.view=v;
+  $$('[data-view]').forEach(s=>s.hidden=s.dataset.view!==v);
+  $$('[data-nav]').forEach(a=>{if(a.dataset.nav===v)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+  closeDrawer();
+  if(v==='cari'){$('#q-main').value=state.q;runSearch(false)}
+  if(v==='dasbor')renderDasbor();
+  if(v==='admin')renderAdmin();
+  if(changed)window.scrollTo(0,0);
+}
+function goSearch(q){state.q=q;if(location.hash==='#cari'){$('#q-main').value=q;runSearch(true)}else{location.hash='#cari';setTimeout(()=>runSearch(true),0)}}
+function refreshAll(){initFilters();renderBeranda();renderHero();const v=state.view;state.view='';route();state.view=v}
+
+async function setMode(m){
+  state.mode=m;loadStores();state.admOff=0;initFilters();updateChip();
+  renderBeranda();renderHero();
+  const h=(location.hash||'#beranda').slice(1);
+  if(h==='cari')runSearch(false);else if(h==='dasbor')renderDasbor();else if(h==='admin')renderAdmin();
+}
+async function connectApi(){
+  $('#conn-status').textContent='Menghubungkan…';
+  const ok=await tryConnect();
+  if(ok){ls.set('tk.prefer','auto');await setMode('api')}
+  else{if(state.mode==='api')await setMode('local');updateChip(`Tidak bisa menghubungi ${api.base}. Pastikan server berjalan (uvicorn app.main:app) dan alamatnya benar. Halaman yang dibuka dari tautan Artifact tidak bisa menghubungi server di komputermu.`)}
+}
+
+/* ---------- events ---------- */
+document.addEventListener('click',async e=>{
+  const t=e.target.closest('[data-open],[data-save],[data-close],[data-ex],[data-cat],[data-rm],[data-del],[data-tab],[data-adm-page],[data-onlytype],#veil,#seed-x,#p-add-btn,#cv-go,#f-reset,#csv-copy,#eng-chip,#conn-save,#conn-local');if(!t)return;
+  if(t.dataset.open){openJob(t.dataset.open,t);return}
+  if(t.dataset.save){const id=t.dataset.save;saved=(saved||[]).includes(id)?saved.filter(x=>x!==id):[...saved,id];persist();
+    $$(`[data-save="${id}"]`).forEach(b=>{const on=saved.includes(id);b.setAttribute('aria-pressed',on);if(b.closest('#saved'))return;b.textContent=on?'Tersimpan':'Simpan'});
+    if(state.view==='dasbor')renderDasbor();return}
+  if(t.hasAttribute('data-close')||t.id==='veil'){closeDrawer();return}
+  if(t.dataset.ex!==undefined){$('#q-hero').value=EXAMPLES[+t.dataset.ex];renderHero();return}
+  if(t.dataset.cat){const rep={data:'Saya ingin mengolah data dan melakukan analisis data',bi:'Saya ingin membuat laporan dan dashboard bisnis',ml:'Saya ingin membuat model machine learning',backend:'Saya ingin membangun API dan backend',frontend:'Saya ingin membangun website dan antarmuka web',mobile:'Saya ingin membuat aplikasi mobile',devops:'Saya ingin mengelola server, jaringan, dan cloud',design:'Saya ingin mendesain tampilan aplikasi dan produk',marketing:'Saya ingin mengelola kampanye pemasaran digital',content:'Saya ingin menulis konten dan menyunting video',finance:'Saya ingin bekerja di bidang akuntansi dan pajak',admin:'Saya ingin bekerja di bidang administrasi perkantoran',hr:'Saya ingin bekerja merekrut karyawan di bidang SDM',sales:'Saya ingin melayani pelanggan dan menjual produk',security:'Saya ingin bekerja menjaga keamanan siber',pm:'Saya ingin mengoordinasikan proyek dan produk'}[t.dataset.cat];goSearch(rep);return}
+  if(t.dataset.rm){profile.skills=profile.skills.filter(s=>s!==t.dataset.rm);seedHidden=true;persist();renderDasbor();return}
+  if(t.dataset.del){
+    if(state.mode==='api'){try{await call('/admin/jobs/'+encodeURIComponent(t.dataset.del),{method:'DELETE',admin:true});jobCache.delete(t.dataset.del);api.meta=await call('/meta');api.info=await call('/health')}catch(err){$('#adm-body').insertAdjacentHTML('afterbegin',adminErr(err));return}}
+    else TK.removeJob(t.dataset.del);
+    renderAdmin();return}
+  if(t.dataset.onlytype){state.f.type=t.dataset.onlytype;initFilters();runSearch(false);return}
+  if(t.dataset.admPage){state.admOff=Math.max(0,state.admOff+(t.dataset.admPage==='next'?30:-30));renderAdmin();return}
+  if(t.dataset.tab){state.tab=t.dataset.tab;renderAdmin();return}
+  if(t.id==='seed-x'){seedHidden=true;persist();renderDasbor();return}
+  if(t.id==='p-add-btn'){const inp=$('#p-add');const r=await addSkillToProfile(inp.value);$('#p-msg').textContent=r.found.length?(r.added.length?'Ditambahkan: '+r.added.join(', '):'Skill itu sudah ada di profilmu.'):'Skill belum ada di kamus. Admin bisa menambahkannya di Kamus skill.';if(r.added.length){inp.value='';renderDasbor()}return}
+  if(t.id==='cv-go'){const r=await addSkillToProfile($('#cv-text').value);const msg=r.found.length?`Ditemukan ${r.found.length} skill: ${r.found.join(', ')}. ${r.added.length} baru ditambahkan ke profil.`:'Tidak ada skill yang dikenali. Pastikan teks CV memuat nama skill, misalnya Python atau Excel.';if(r.added.length){seedHidden=true;await renderDasbor()}$('#cv-msg').textContent=msg;return}
+  if(t.id==='f-reset'){state.f={loc:'',lvl:'',type:'',sal:0};state.sort='match';state.useProf=false;initFilters();$('#f-sal').value=0;$('#f-sort').value='match';$('#f-prof').checked=false;runSearch(false);return}
+  if(t.id==='csv-copy'){const h='job_title,company,description,required_skills,preferred_skills,experience_level,location,employment_type';const done=ok=>{$('#csv-msg').textContent=ok?'Header disalin.':'Salin manual: '+h};try{navigator.clipboard.writeText(h).then(()=>done(true),()=>done(false))}catch(err){done(false)}return}
+  if(t.id==='eng-chip'){const p=$('#conn');p.hidden=!p.hidden;t.setAttribute('aria-expanded',String(!p.hidden));return}
+  if(t.id==='conn-save'){api.base=($('#conn-url').value||'').trim().replace(/\/+$/,'');ls.set('tk.apiurl',api.base);const u=$('#conn-user').value.trim(),pw=$('#conn-pass').value;await connectApi();
+    if(state.mode==='api'&&u&&pw){try{await login(u,pw);updateChip();if(state.view==='admin')renderAdmin()}catch(err){$('#conn-status').textContent=err.status?err.message:'Gagal menghubungi API.'}}
+    $('#conn-pass').value='';return}
+  if(t.id==='conn-local'){ls.set('tk.prefer','local');await setMode('local');return}
+});
+document.addEventListener('change',e=>{
+  const t=e.target;
+  if(t.dataset&&t.dataset.track!==undefined){const id=t.dataset.track;tracker=(tracker||[]).filter(x=>x.id!==id);if(t.value)tracker.push({id,st:t.value});seedHidden=true;persist();if(state.view==='dasbor')renderDasbor();return}
+  if(t.name==='method'){state.method=t.value;runSearch(false);return}
+  if(t.id==='f-loc'){state.f.loc=t.value;runSearch(false)}
+  else if(t.id==='f-lvl'){state.f.lvl=t.value;runSearch(false)}
+  else if(t.id==='f-type'){state.f.type=t.value;runSearch(false)}
+  else if(t.id==='f-sal'){state.f.sal=+t.value||0;runSearch(false)}
+  else if(t.id==='f-sort'){state.sort=t.value;runSearch(false)}
+  else if(t.id==='f-prof'){state.useProf=t.checked;runSearch(false)}
+  else if(t.id==='p-lvl'){profile.lvl=+t.value;seedHidden=true;persist();renderDasbor()}
+  else if(t.id==='p-loc'){profile.loc=t.value;seedHidden=true;persist();renderDasbor()}
+  else if(t.id==='cv-file'&&t.files[0]){const fr=new FileReader();fr.onload=()=>{$('#cv-text').value=String(fr.result).slice(0,20000)};fr.readAsText(t.files[0])}
+  else if(t.id==='csv-file'&&t.files[0]){const fr=new FileReader();fr.onload=()=>{const r=TK.importCSV(String(fr.result));$('#csv-msg').textContent=`${r.added} lowongan ditambahkan, ${r.skipped} baris dilewati.`;if(r.added)setTimeout(renderAdmin,600)};fr.readAsText(t.files[0])}
+});
+document.addEventListener('input',e=>{
+  const t=e.target;
+  if(t.id==='q-hero'){clearTimeout(t._h);t._h=setTimeout(renderHero,state.mode==='api'?250:120)}
+  else if(t.id==='q-main'){state.q=t.value;clearTimeout(t._h);t._h=setTimeout(()=>runSearch(false),state.mode==='api'?350:220)}
+  else if(t.id==='p-nama'){profile.nama=t.value;persist()}
+  else if(t.id==='p-edu'){profile.edu=t.value;persist()}
+});
+document.addEventListener('submit',async e=>{
+  e.preventDefault();const id=e.target.id;
+  if(id==='hero-form'){goSearch($('#q-hero').value)}
+  else if(id==='main-form'){state.q=$('#q-main').value;runSearch(true)}
+  else if(id==='job-form'){
+    const items=$('#a-req').value.split(',').map(x=>x.trim()).filter(Boolean);
+    if(state.mode==='api'){
+      try{
+        const req=[];for(const it of items){const f=await extractSkills(it);req.push(f[0]||it)}
+        const r=await call('/admin/jobs',{method:'POST',admin:true,body:{job_title:$('#a-title').value.trim(),company:$('#a-comp').value.trim(),description:$('#a-desc').value.trim(),experience_level:LEVELS[+$('#a-lvl').value],location:$('#a-loc').value,employment_type:$('#a-type').value,required_skills:req}});
+        api.info=await call('/health');api.meta=await call('/meta');await renderAdmin();const m=$('#a-msg');if(m)m.textContent=`Lowongan ${r.job_id} ditambahkan dan indeks dibangun ulang.`;
+      }catch(err){const m=$('#a-msg');if(m)m.textContent=err.status===401?'Masuk sebagai admin dulu (panel Sambungan).':'Gagal: '+err.message}
+    }else{
+      const sp=items.map(x=>TK.extractSkills(x)[0]||x);
+      const j=TK.addJob({title:$('#a-title').value.trim(),company:$('#a-comp').value.trim(),loc:$('#a-loc').value,type:$('#a-type').value,lvl:+$('#a-lvl').value,req:sp,desc:$('#a-desc').value.trim()});
+      renderAdmin();$('#a-msg').textContent=`${j.title} ditambahkan dan indeks dibangun ulang.`;
+    }
+  }
+  else if(id==='alias-form'||id==='skill-form'){
+    const m=()=>{const x=$('#sk-msg');x.hidden=false;return x};
+    if(state.mode==='api'){
+      try{
+        if(id==='alias-form'){await call('/admin/skills/'+encodeURIComponent($('#al-skill').value)+'/aliases',{method:'POST',admin:true,body:{alias:$('#al-new').value}});api.skills=null;await renderAdmin();m().textContent='Alias ditambahkan dan indeks dibangun ulang.'}
+        else{const al=$('#sk-al').value.split(',').map(x=>x.trim()).filter(Boolean);await call('/admin/skills',{method:'POST',admin:true,body:{skill_name:$('#sk-name').value.trim(),category:$('#sk-c').value,aliases:al}});api.skills=null;api.info=await call('/health');await renderAdmin();m().textContent='Skill ditambahkan ke kamus.'}
+      }catch(err){m().textContent=err.status===401?'Masuk sebagai admin dulu (panel Sambungan).':err.status?err.message:'Gagal menghubungi API.'}
+    }else if(id==='alias-form'){const ok=TK.addAlias($('#al-skill').value,$('#al-new').value);m().textContent=ok?'Alias ditambahkan dan indeks dibangun ulang.':'Alias kosong atau sudah ada.';if(ok){$('#al-new').value=''}}
+    else{const al=$('#sk-al').value.split(',').map(x=>x.trim().toLowerCase()).filter(Boolean);const ok=TK.addSkill($('#sk-name').value.trim(),'Lainnya',al,{[$('#sk-c').value]:1});if(ok){renderAdmin();m().textContent='Skill ditambahkan ke kamus.'}else m().textContent='Nama skill kosong atau sudah ada.'}
+  }
+});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape')closeDrawer();
+  if(e.key==='Enter'&&(e.ctrlKey||e.metaKey)&&e.target.id==='q-main'){e.preventDefault();state.q=e.target.value;runSearch(true)}
+  if(!$('#drawer').hidden&&e.key==='Tab'){const f=$$('button,select,input,a[href]',$('#drawer'));if(f.length){const a=f[0],z=f[f.length-1];if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}}}
+});
+$('#theme').addEventListener('click',()=>{const r=document.documentElement;const dark=r.dataset.theme==='dark'||(!r.dataset.theme&&matchMedia('(prefers-color-scheme: dark)').matches);r.dataset.theme=dark?'light':'dark'});
+window.addEventListener('hashchange',route);
+
+/* ---------- mulai: tampil dulu dengan mesin browser, lalu beralih ke API bila ada ---------- */
+loadStores();
+$('#q-hero').value=EXAMPLES[0];
+updateChip();renderBeranda();renderHero();initFilters();route();
+if(ls.get('tk.prefer','auto')!=='local'){tryConnect().then(ok=>{if(ok)setMode('api')})}
+window.__tk={state,api,call,setMode};
+})();
+
+</script>

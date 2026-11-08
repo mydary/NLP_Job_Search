@@ -1,0 +1,57 @@
+skill_id,skill_name,category,aliases
+S001,Python,Pemrograman,python 3;py;python3
+S002,SQL,Database,query sql;sql server;structured query language
+S003,Microsoft Excel,Analisis Data,excel;ms excel;spreadsheet;google sheets
+S004,Power BI,Visualisasi Data,powerbi;power bi desktop
+S005,Tableau,Visualisasi Data,looker studio;data studio
+S006,Pandas,Analisis Data,pandas dan numpy;numpy;dataframe
+S007,Machine Learning,Machine Learning,ml;deep learning;scikit-learn;pembelajaran mesin
+S008,Statistik,Analisis Data,statistika;spss;statistics
+S009,NLP,Machine Learning,natural language processing;pemrosesan bahasa alami;text mining
+S010,Analisis Data,Analisis Data,data analysis;analisa data;analis data;data analytics;mengolah data;olah data
+S011,Visualisasi Data,Visualisasi Data,dashboard;data visualization;visualisasi;grafik
+S012,ETL,Database,pipeline data;data pipeline
+S013,PostgreSQL,Database,postgre sql;postgres
+S014,MySQL,Database,mariadb
+S015,Django,Pemrograman,
+S016,FastAPI,Pemrograman,fast api
+S017,PHP,Pemrograman,
+S018,Laravel,Pemrograman,
+S019,JavaScript,Pemrograman,js
+S020,TypeScript,Pemrograman,ts
+S021,Node.js,Pemrograman,nodejs;node js;express.js
+S022,React,Pemrograman,reactjs;react.js;next.js
+S023,HTML/CSS,Pemrograman,html dan css;html5 dan css3;html;css;html5;css3;tailwind
+S024,REST API,Pemrograman,restful api;api;restful;rest;web service
+S025,Git,Alat Kerja,github;git/github;gitlab;version control
+S026,Docker,Infrastruktur,container;kontainer
+S027,Linux,Infrastruktur,ubuntu;bash;shell
+S028,AWS,Infrastruktur,cloud (aws/gcp);amazon web services;cloud;gcp;azure
+S029,CI/CD,Infrastruktur,github actions;ci cd;jenkins
+S030,Flutter,Pemrograman,flutter (dart);dart
+S031,Android,Pemrograman,kotlin;android studio
+S032,Jaringan Komputer,Infrastruktur,networking;mikrotik;jaringan;cisco;tcp/ip
+S033,Keamanan Siber,Keamanan,cybersecurity;keamanan informasi;cyber security;pentest;penetration testing
+S034,Figma,Desain,adobe xd;sketch
+S035,UI/UX Design,Desain,ui/ux;desain ui/ux;ux design;ui ux;user experience;user interface
+S036,Riset Pengguna,Desain,user research;usability testing
+S037,Adobe Photoshop,Desain,photoshop;canva;illustrator;coreldraw
+S038,Desain Grafis,Desain,graphic design;desain poster
+S039,Video Editing,Konten,premiere pro;capcut;edit video;premiere;after effects
+S040,Digital Marketing,Pemasaran,pemasaran digital;meta ads;google ads;iklan online
+S041,SEO,Pemasaran,search engine optimization
+S042,Google Analytics,Pemasaran,ga4
+S043,Social Media,Pemasaran,media sosial;sosial media;instagram;tiktok
+S044,Copywriting,Konten,menulis copy;copywriter;caption
+S045,Content Writing,Konten,penulisan konten;menulis artikel;content writer;penulis konten
+S046,Akuntansi,Keuangan,pembukuan;accurate/zahir;accounting;laporan keuangan;zahir;accurate
+S047,Pajak,Keuangan,perpajakan;spt;taxation;pph
+S048,Microsoft Office,Alat Kerja,ms word dan powerpoint;ms office;ms word;powerpoint
+S049,Administrasi,Administrasi,administrasi perkantoran;pengarsipan;data entry;surat menyurat
+S050,Rekrutmen,SDM,recruitment;talent acquisition;recruiting;merekrut;screening cv
+S051,Customer Service,Layanan,layanan pelanggan;cs;customer support
+S052,Penjualan,Layanan,sales;menjual;target penjualan
+S053,Negosiasi,Layanan,negotiation;bernegosiasi
+S054,Komunikasi,Soft Skill,public speaking;communication;presentasi
+S055,Manajemen Proyek,Manajemen,project management;pmp
+S056,Agile,Manajemen,scrum;kanban;sprint

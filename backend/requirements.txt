@@ -1,0 +1,14 @@
+fastapi
+uvicorn[standard]
+pydantic>=2
+numpy
+pandas
+scikit-learn
+sqlalchemy>=2
+# psycopg dipakai bila TEPAT_DATABASE_URL mengarah ke PostgreSQL:
+psycopg[binary]>=3
+# opsional, untuk SBERT:
+# sentence-transformers
+# untuk menjalankan tes:
+# pytest
+# httpx
