@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Tepat Karir: mesin pencarian lowongan berbasis NLP
 
 Proyek belajar Information Retrieval dan NLP untuk bahasa Indonesia. Pengguna menulis kemampuan atau pekerjaan
@@ -86,3 +87,6 @@ karena model SBERT tidak bisa diunduh di lingkungan tempat notebook itu dijalank
 - Recall@10 dilaporkan sebagai recall terbatas (hit dibagi min(10, jumlah relevan)), karena satu kueri bisa punya
   puluhan lowongan relevan.
 - Skor kecocokan adalah perkiraan kesesuaian berdasarkan kriteria sistem, bukan peluang diterima kerja.
+=======
+# NLP_Job_Search
+>>>>>>> 38be589a678cde52bde2b0bbb7609b686854fee5
