@@ -1,35 +1,24 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Tepat Karir</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
 <style>
-/* Layout: satu kolom kerja lebar. Beranda berpusat pada kotak pencarian bahasa alami dengan panel
-   "yang kami tangkap" di sampingnya. Hasil berupa daftar baris berpemisah garis tipis, dengan cincin skor
-   di kanan. Motif visual: lingkaran konsentris (sasaran), sesuai nama "Tepat". */
+/* Tema: palet ungu senja (#312C51, #48426D) dengan aksen pasir (#F0C38E) dan salem (#F1AA9B).
+   Kartu membulat dan lembut, satu kolom kerja, motif lingkaran konsentris sesuai nama "Tepat". */
 :root{
-  --paper:#F1F4F8; --surface:#FFFFFF; --sunk:#E7ECF3; --ink:#0D1B2E; --ink-2:#4A5A70; --line:#D3DCE8;
-  --accent:#2447F5; --on-accent:#FFFFFF; --accent-soft:#E2E8FF;
-  --mark:#B87E00; --mark-soft:#FFF1CC; --good:#0B7D56; --bad:#B4372C;
-  --shadow:0 1px 0 rgba(13,27,46,.04),0 14px 30px -18px rgba(13,27,46,.35);
+  --paper:#312C51; --surface:#3C3762; --sunk:#2A2547; --ink:#F7F2EA; --ink-2:#C0BBD9; --line:#5A5486;
+  --accent:#F0C38E; --on-accent:#2A2547; --accent-soft:rgba(240,195,142,.16);
+  --mark:#F1AA9B; --mark-soft:rgba(241,170,155,.2); --good:#9ADBB9; --bad:#F1AA9B;
+  --shadow:0 18px 32px -20px rgba(10,8,30,.8),inset 0 1px 0 rgba(255,255,255,.05);
   --f-display:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;
   --f-body:'Instrument Sans','Segoe UI',system-ui,sans-serif;
   --f-mono:'JetBrains Mono',ui-monospace,Consolas,monospace;
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --paper:#0A111D; --surface:#111B2B; --sunk:#0D1626; --ink:#E7EDF7; --ink-2:#9BAAC0; --line:#23324A;
-    --accent:#809AFF; --on-accent:#0A111D; --accent-soft:#1A2850;
-    --mark:#F2B930; --mark-soft:#3A2E0C; --good:#3FCB98; --bad:#FF8A7D;
-    --shadow:0 1px 0 rgba(0,0,0,.3),0 14px 30px -18px rgba(0,0,0,.8);
-    color-scheme:dark;
-  }
-}
-:root[data-theme="dark"]{
-  --paper:#0A111D; --surface:#111B2B; --sunk:#0D1626; --ink:#E7EDF7; --ink-2:#9BAAC0; --line:#23324A;
-  --accent:#809AFF; --on-accent:#0A111D; --accent-soft:#1A2850;
-  --mark:#F2B930; --mark-soft:#3A2E0C; --good:#3FCB98; --bad:#FF8A7D;
-  --shadow:0 1px 0 rgba(0,0,0,.3),0 14px 30px -18px rgba(0,0,0,.8);
   color-scheme:dark;
 }
 *{box-sizing:border-box}
@@ -82,6 +71,7 @@ input:hover,select:hover,textarea:hover{border-color:var(--ink-2)}
 .chip.have{background:var(--accent-soft);border-color:transparent;color:var(--accent);font-weight:600}
 .chip.rel{border-color:var(--mark);color:var(--mark);background:transparent}
 .chip.miss{border-style:dashed;color:var(--ink-2);background:transparent}
+mark{background:var(--mark-soft);color:inherit;border-radius:3px;padding:0 2px}
 .chip.tag{background:var(--sunk);border-color:transparent}
 .chip button{border:0;background:none;cursor:pointer;padding:0 0 0 2px;color:inherit;font-size:14px;line-height:1}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
@@ -155,6 +145,7 @@ input:hover,select:hover,textarea:hover{border-color:var(--ink-2)}
 .empty{padding:34px 20px;text-align:center;color:var(--ink-2)}
 
 /* Drawer */
+[hidden]{display:none!important}
 #veil{position:fixed;inset:0;background:rgba(5,10,20,.5);z-index:70}
 #drawer{position:fixed;top:0;right:0;bottom:0;width:min(560px,100%);z-index:80;background:var(--surface);border-left:1px solid var(--line);overflow-y:auto;padding:22px max(20px,env(safe-area-inset-right,0px)) calc(28px + env(safe-area-inset-bottom,0px)) 22px;padding-top:calc(22px + env(safe-area-inset-top,0px));display:grid;gap:20px;align-content:start}
 #drawer .dh{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}
@@ -214,7 +205,7 @@ tr.best td{background:var(--accent-soft)}
 .eng-chip i{width:8px;height:8px;border-radius:50%;background:var(--ink-2);opacity:.5}
 .eng-chip.on i{background:var(--accent);opacity:1}
 #conn{border-bottom:1px solid var(--line);background:var(--sunk);padding-block:14px}
-#conn .row{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr) auto auto;gap:10px;align-items:end}
+#conn .row{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr) auto auto auto;gap:10px;align-items:end}
 #conn input{width:100%}
 @media (max-width:720px){#conn .row{grid-template-columns:minmax(0,1fr)}.eng-chip span{display:none}}
 footer{border-top:1px solid var(--line);padding-block:24px calc(28px + env(safe-area-inset-bottom,0px));font-size:13px;color:var(--ink-2)}
@@ -246,8 +237,86 @@ footer{border-top:1px solid var(--line);padding-block:24px calc(28px + env(safe-
 @media (prefers-reduced-motion:no-preference){
   .cbar b,.brk b,.hb b,.gapbar b{transition:width .35s ease}
 }
+
+/* ===== Penyegaran tampilan ===== */
+body{background:var(--paper)}
+body::before{background:transparent}
+main{padding-bottom:56px}
+.eyebrow{color:var(--mark)}
+.top{background:var(--paper);border-bottom:0}
+.bar{padding-block:14px}
+#nav{gap:6px}
+#nav a{padding:8px 16px;border-radius:99px}
+#nav a:hover{background:var(--surface);color:var(--ink)}
+#nav a[aria-current="page"]{background:var(--accent);color:var(--on-accent);box-shadow:none;border-radius:99px;font-weight:600}
+.icon-btn,.eng-chip{border-radius:14px;background:var(--surface);border-color:transparent;box-shadow:var(--shadow)}
+.eng-chip{border-radius:99px;padding:0 14px}
+.eng-chip.on i{background:var(--good)}
+.btn{border-radius:14px;min-height:44px;padding:0 20px;background:var(--surface);border-color:transparent;box-shadow:var(--shadow)}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);color:var(--on-accent);border-color:transparent}
+.btn.sm{min-height:34px;border-radius:10px;padding:0 13px}
+.btn[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+input[type=text],input[type=number],input[type=search],input[type=password],select,textarea{background:var(--sunk);border:1px solid transparent;border-radius:14px;box-shadow:inset 0 2px 6px rgba(8,6,24,.35)}
+input:hover,select:hover,textarea:hover{border-color:var(--line)}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:1px}
+.searchbox textarea,.qbox textarea{background:transparent;box-shadow:none}
+.searchbox,.qbox,.panel,.filters,.latest,.tw{border-color:rgba(255,255,255,.06);border-radius:24px;box-shadow:var(--shadow)}
+.tw{border-radius:18px}
+.searchbox,.qbox{padding:16px}
+.seg{background:var(--sunk);border-color:transparent;border-radius:14px;box-shadow:inset 0 2px 6px rgba(8,6,24,.3)}
+.seg span{border-radius:11px}
+.seg input:checked+span{background:var(--accent);color:var(--on-accent)}
+.chip{background:var(--sunk);border-color:transparent;color:var(--ink)}
+.chip.have{background:var(--accent-soft);color:var(--accent)}
+.chip.rel{border-color:var(--mark);color:var(--mark);background:transparent}
+.chip.miss{border-color:var(--line);background:transparent}
+.chip.tag{background:var(--sunk)}
+mark{background:rgba(241,170,155,.3);color:var(--ink)}
+.examples button{background:var(--surface);border-color:transparent;border-radius:99px;padding:6px 14px}
+.examples button:hover{background:var(--accent);color:var(--on-accent)}
+.hero{padding-block:48px 24px}
+.hero h1 em{color:var(--mark)}
+.hero .panel{background:#F0C38E;color:var(--on-accent);--ink:#2A2547;--ink-2:#5B5279;--line:rgba(42,37,71,.22);--accent:#2A2547;--accent-soft:rgba(42,37,71,.1);--sunk:rgba(42,37,71,.1)}
+.hero .panel .eyebrow{color:#5B5279}
+.hero .panel .chip{background:rgba(42,37,71,.1);color:#2A2547}
+.hero .panel .chip.have{background:#2A2547;color:#F0C38E}
+.section{padding-block:28px}
+.cat .mono{white-space:nowrap}
+.cat{background:var(--surface);border-color:transparent;border-radius:18px;box-shadow:var(--shadow);padding:15px 16px}
+.cat:hover{border-color:var(--accent)}
+.latest li{border-top-color:rgba(255,255,255,.07)}
+.results{background:none;border:0;box-shadow:none;display:grid;gap:12px}
+.res{background:var(--surface);border:1px solid rgba(255,255,255,.06);border-radius:22px;box-shadow:var(--shadow);padding:20px}
+.res:first-child{border-top:1px solid rgba(255,255,255,.06)}
+.res h3{font-size:18px}
+.ring b{color:var(--ink)}
+.filters{padding:20px}
+.cbar i,.brk i,.hb i,.gapbar i{background:var(--sunk)}
+.gapbar b{background:var(--mark)}
+.formula{background:var(--sunk);border-radius:12px}
+#drawer{background:var(--surface);border-left:0;box-shadow:-24px 0 48px -24px rgba(8,6,24,.7)}
+#veil{background:rgba(20,16,40,.62)}
+.tabs{border-bottom:0;gap:8px;flex-wrap:wrap;margin-top:18px}
+.tabs button{border-radius:99px;padding:8px 16px;background:var(--surface);color:var(--ink-2)}
+.tabs button[aria-selected="true"]{background:var(--accent);color:var(--on-accent);box-shadow:none}
+thead th{background:var(--sunk)}
+th,td{border-top-color:rgba(255,255,255,.07)}
+tr.best td{background:var(--accent-soft)}
+.col{background:var(--sunk);border-radius:18px}
+.kcard{background:var(--surface);border-color:transparent;border-radius:14px}
+.banner{background:var(--mark-soft);border-radius:16px}
+.msg{background:var(--sunk);border-radius:12px}
+#conn{background:var(--sunk);border-bottom:0}
+.act-bar{display:flex;justify-content:flex-end}
+.page-h{padding-block:32px 8px}
+input[type=file]{color:var(--ink-2);font-size:13px}
+input[type=file]::file-selector-button{border:0;border-radius:10px;padding:8px 14px;margin-right:10px;background:var(--sunk);color:var(--ink);font:600 13px var(--f-body);cursor:pointer}
+@media (max-width:720px){.bar{gap:10px}#nav{order:3;flex:1 0 100%}.brand{flex:1}}
 </style>
 
+</head>
+<body>
 <header class="top">
   <div class="wrap bar">
     <a class="brand" href="#beranda" aria-label="Tepat Karir, ke beranda">
@@ -257,13 +326,11 @@ footer{border-top:1px solid var(--line);padding-block:24px calc(28px + env(safe-
     <nav id="nav" aria-label="Menu utama">
       <a href="#beranda" data-nav="beranda">Beranda</a>
       <a href="#cari" data-nav="cari">Cari Lowongan</a>
+      <a href="#biasa" data-nav="biasa">Tanpa NLP</a>
       <a href="#dasbor" data-nav="dasbor">Dasbor Saya</a>
       <a href="#admin" data-nav="admin">Admin</a>
     </nav>
     <button class="eng-chip" id="eng-chip" type="button" aria-expanded="false" aria-controls="conn"><i></i><span id="eng-label">Mesin: browser</span></button>
-    <button class="icon-btn" id="theme" type="button" aria-label="Ganti tema terang atau gelap">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
-    </button>
   </div>
 </header>
 <section id="conn" hidden aria-label="Sambungan ke API"><div class="wrap">
@@ -273,6 +340,7 @@ footer{border-top:1px solid var(--line);padding-block:24px calc(28px + env(safe-
     <div class="field"><label for="conn-pass">Sandi</label><input type="password" id="conn-pass" autocomplete="current-password"></div>
     <button class="btn primary" type="button" id="conn-save">Hubungkan</button>
     <button class="btn" type="button" id="conn-local">Pakai mesin browser</button>
+    <button class="btn" type="button" id="conn-logout">Keluar admin</button>
   </div>
   <p class="small muted" id="conn-status" style="margin-top:10px" aria-live="polite"></p>
 </div></section>
@@ -296,22 +364,10 @@ footer{border-top:1px solid var(--line);padding-block:24px calc(28px + env(safe-
       <div class="examples" id="examples" aria-label="Contoh pencarian"></div>
     </div>
     <aside class="panel" aria-live="polite">
-      <p class="eyebrow">Yang kami tangkap dari tulisanmu</p>
+      <p class="eyebrow">Informasi dari profil Anda</p>
       <dl class="und" id="und-hero"></dl>
     </aside>
   </div>
-
-  <div class="section"><div class="wrap">
-    <h2>Dari kalimatmu sampai skor kecocokan</h2>
-    <p class="sub">Setiap pencarian melewati lima tahap yang sama, dan hasilnya selalu disertai penjelasan.</p>
-    <ol class="pipe">
-      <li><span class="mono">1</span><h3>Bersihkan teks</h3><p>Huruf disamakan, tanda baca dibuang, kata penghubung disaring.</p></li>
-      <li><span class="mono">2</span><h3>Kenali skill</h3><p>"MS Excel" dan "excel" sama-sama dibaca sebagai Microsoft Excel.</p></li>
-      <li><span class="mono">3</span><h3>Cari dua arah</h3><p>BM25 mencocokkan kata. Embedding bidang mencocokkan makna.</p></li>
-      <li><span class="mono">4</span><h3>Gabung dengan RRF</h3><p>Dua daftar peringkat digabung tanpa membandingkan skor mentahnya.</p></li>
-      <li><span class="mono">5</span><h3>Beri skor dan alasan</h3><p>Skill, relevansi, level, dan lokasi dihitung lalu dijelaskan.</p></li>
-    </ol>
-  </div></div>
 
   <div class="section"><div class="wrap">
     <h2>Jelajahi lewat bidang</h2>
@@ -322,7 +378,6 @@ footer{border-top:1px solid var(--line);padding-block:24px calc(28px + env(safe-
   <div class="section"><div class="wrap">
     <h2>Lowongan terbaru</h2>
     <ul class="rows latest" id="latest"></ul>
-    <p class="note">Semua lowongan dan perusahaan di sini adalah data sintetis untuk demonstrasi mesin pencarian. Tidak ada lowongan aktual dan tidak ada lamaran yang terkirim.</p>
   </div></div>
 </section>
 
@@ -369,12 +424,35 @@ footer{border-top:1px solid var(--line);padding-block:24px calc(28px + env(safe-
   </div>
 </section>
 
+<!-- TANPA NLP -->
+<section id="v-biasa" data-view="biasa" hidden>
+  <div class="wrap page-h">
+    <p class="eyebrow">Tanpa NLP</p>
+    <h1 style="margin-top:10px">Pencari lowongan biasa, sebagai pembanding</h1>
+  </div>
+  <div class="wrap">
+   <div style="max-width:860px;margin-top:18px">
+    <form class="qbox" id="plain-form">
+      <label class="lbl" for="q-plain">Kata kunci</label>
+      <input type="text" id="q-plain" autocomplete="off" placeholder="mau magang di bidang analisis data" style="width:100%">
+      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between;align-items:center">
+        <span></span>
+        <button class="btn primary" type="submit">Cari</button>
+      </div>
+    </form>
+    <div class="count"><p id="plain-count" class="muted"></p><button class="btn sm" type="button" id="plain-to-nlp">Coba kueri ini dengan NLP</button></div>
+    <div id="plain-empty" class="panel" hidden></div>
+    <ul class="rows results" id="plain-results"></ul>
+    <button class="btn sm" type="button" id="plain-more" hidden>Tampilkan lebih banyak</button>
+   </div>
+  </div>
+</section>
+
 <!-- DASBOR -->
 <section id="v-dasbor" data-view="dasbor" hidden>
   <div class="wrap page-h">
     <p class="eyebrow">Dasbor Saya</p>
     <h1 style="margin-top:10px">Profil, rekomendasi, dan lamaranmu</h1>
-    <p class="muted" style="margin-top:8px;max-width:64ch">Data disimpan di browser ini saja. Tidak ada akun dan tidak ada data yang dikirim ke server.</p>
   </div>
   <div class="wrap" style="padding-block:18px 56px">
     <div id="seed-note"></div>
@@ -433,7 +511,7 @@ footer{border-top:1px solid var(--line);padding-block:24px calc(28px + env(safe-
   <div class="wrap page-h">
     <p class="eyebrow">Admin</p>
     <h1 style="margin-top:10px">Data lowongan dan mutu pencarian</h1>
-    <p class="muted" style="margin-top:8px;max-width:66ch">Mode demo tanpa login. Perubahan pada lowongan dan kamus skill berlaku selama halaman ini terbuka, dan indeks pencarian dibangun ulang otomatis.</p>
+    
     <div class="tabs" role="tablist" id="tabs">
       <button role="tab" data-tab="ringkasan">Ringkasan</button>
       <button role="tab" data-tab="lowongan">Lowongan</button>
@@ -449,9 +527,7 @@ footer{border-top:1px solid var(--line);padding-block:24px calc(28px + env(safe-
 <div id="veil" hidden></div>
 <aside id="drawer" role="dialog" aria-modal="true" aria-label="Detail lowongan" hidden></aside>
 
-<footer><div class="wrap">
-  <p>Tepat Karir adalah purwarupa mesin pencarian lowongan. Data lowongan sintetis, perusahaan fiktif.</p><p id="foot-engine" style="margin-top:6px"></p>
-</div></footer>
+
 
 <script id="engine">
 const TK=(()=>{
@@ -795,6 +871,7 @@ const persist=()=>{ls.set('tk.profile',profile);ls.set('tk.log',log);ls.set(K('t
 
 /* ---------- sambungan ke API ---------- */
 const api={base:String(ls.get('tk.apiurl','http://127.0.0.1:8000')||'').replace(/\/+$/,''),token:ls.get('tk.token',''),user:ls.get('tk.user',''),exp:ls.get('tk.exp',0),info:null,meta:null,skills:null};
+const apiLvl=i=>((api.meta&&api.meta.levels)||['Internship','Entry Level','Junior','Mid-level','Senior'])[i];
 async function call(path,o={}){
   const ctl=new AbortController();const t=setTimeout(()=>ctl.abort(),o.timeout||10000);
   try{
@@ -811,7 +888,7 @@ async function tryConnect(){
 const jobCache=new Map(),matchCache=new Map();
 const daysSince=d=>d?Math.max(0,Math.round((TODAY-new Date(d+'T00:00:00+07:00'))/864e5)):0;
 function jobFromApi(j){
-  return{id:j.job_id,title:j.job_title,company:j.company,loc:j.location,type:j.employment_type,lvl:Math.max(0,LEVELS.indexOf(j.experience_level)),fam:j.family||'',
+  return{id:j.job_id,title:j.job_title,company:j.company,loc:j.location,type:j.employment_type,lvl:Math.max(0,((api.meta&&api.meta.levels)||[]).indexOf(j.experience_level)),fam:j.family||'',
     req:j.required_skills||[],pref:j.preferred_skills||[],desc:j.description||'',smin:j.salary_min||0,smax:j.salary_max||0,days:daysSince(j.posted_at),
     dl:j.deadline?Math.round((new Date(j.deadline+'T00:00:00+07:00')-TODAY)/864e5):30};
 }
@@ -827,7 +904,7 @@ const emptyU=()=>({skills:[],concepts:[],roles:[],level:null,empType:null,loc:nu
 async function apiSearch(q,o){
   const f=o.filters||{};
   const body={query:q,method:o.method==='sem'?'semantic':(o.method||'hybrid'),
-    filters:{location:f.loc||null,experience_level:(f.lvl===''||f.lvl==null)?null:LEVELS[+f.lvl],employment_type:f.type||null,min_salary:f.sal||null},
+    filters:{location:f.loc||null,experience_level:(f.lvl===''||f.lvl==null)?null:apiLvl(+f.lvl),employment_type:f.type||null,min_salary:f.sal||null},
     user_skills:o.extraSkills||[],limit:o.limit||50};
   const r=await call('/search',{method:'POST',body,timeout:15000});
   const skills=r.understood.skills||[];const ctx=(o.ctx||'cari')+':';
@@ -879,7 +956,6 @@ function updateChip(warn){
   $('#eng-label').textContent=on?'Mesin: API Python':'Mesin: browser';
   $('#conn-url').value=api.base;$('#conn-user').value=api.user||'';$('#conn-pass').value='';
   $('#conn-status').textContent=warn||(on?`Terhubung ke ${api.base}. ${api.info.jobs} lowongan, database ${api.info.database}, pencarian semantik: ${String(api.info.semantic_backend).toUpperCase()}. ${adminNote()}`:'Tidak terhubung ke API. Memakai mesin di browser dengan 41 lowongan demo.');
-  $('#foot-engine').textContent=on?'Pencarian dijalankan oleh API Python (BM25, semantik, RRF) pada dataset 368 lowongan sintetis.':'Pencarian berjalan seluruhnya di browser dengan 41 lowongan demo. BM25 dan embedding bidang berbasis kamus menggantikan SBERT.';
 }
 function chipsFor(m){return m.req.map(x=>chip(x,'req')).join('')+m.pref.map(x=>chip(x,'pref')).join('')}
 function chip(x,kind){const cls=x.st==='have'?'have':x.st==='rel'?'rel':'miss';const mark=x.st==='have'?'✓ ':x.st==='rel'?'≈ ':'';const t=x.st==='rel'?` title="Mirip dengan ${esc(x.via)}"`:'';return `<span class="chip ${cls}"${t}>${mark}${esc(x.n)}${kind==='pref'?'<small class="muted">&nbsp;+</small>':''}</span>`}
@@ -956,8 +1032,9 @@ async function openJob(id,from){
   let j=getJob(id);
   if(!j&&state.mode==='api'){await ensureJobs([id]);j=getJob(id)}
   if(!j)return;
-  let m;
-  if(state.mode==='local'){m=TK.matchFor(j,state.lastCtx&&state.view==='cari'?state.lastCtx:profCtx())}
+  let m;const noNlp=state.view==='biasa';
+  if(noNlp){m=null}
+  else if(state.mode==='local'){m=TK.matchFor(j,state.lastCtx&&state.view==='cari'?state.lastCtx:profCtx())}
   else{
     const key=(state.view==='cari'?'cari:':'dasbor:')+id;m=matchCache.get(key);
     if(!m){
@@ -969,14 +1046,15 @@ async function openJob(id,from){
   const sv=(saved||[]).includes(id);const tr=(tracker||[]).find(t=>t.id===id);
   const row=(l,v)=>`<div><span>${l}</span><i><b style="width:${v}%"></b></i><span class="mono">${v}</span></div>`;
   const dl=new Date(TODAY.getTime()+j.dl*864e5).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'});
-  $('#drawer').innerHTML=`<div class="dh"><div style="min-width:0"><p class="eyebrow">${esc(j.company)}</p><h2 style="margin-top:8px">${esc(j.title)}</h2><p class="meta" style="margin-top:6px">${esc(j.loc)} · ${j.type} · ${LEVELS[j.lvl]}</p></div><button class="icon-btn" type="button" data-close aria-label="Tutup detail">✕</button></div>
-  <div class="split">${ring(m.final)}<p class="small muted">Skor ini perkiraan kesesuaian berdasarkan kriteria sistem, bukan peluang diterima kerja.</p></div>
+  const nlpBlock=noNlp?'':`  <div class="split">${ring(m.final)}<p class="small muted">Skor ini perkiraan kesesuaian berdasarkan kriteria sistem, bukan peluang diterima kerja.</p></div>
   <div class="brk">${row('Skill (40%)',m.S)}${row('Relevansi (30%)',m.R)}${row('Pengalaman (20%)',m.E)}${row('Lokasi (10%)',m.L)}</div>
   <p class="formula">0,40×${m.S} + 0,30×${m.R} + 0,20×${m.E} + 0,10×${m.L} = ${m.final}</p>
   <div><h3 style="font-size:16px">Mengapa direkomendasikan</h3><p style="margin-top:6px">${esc(m.explain)}</p></div>
   <div><h3 style="font-size:16px">Skill wajib</h3><div class="chips" style="margin-top:8px">${m.req.map(x=>chip(x,'req')).join('')||'<span class="muted">Tidak dicantumkan</span>'}</div>
   ${m.pref.length?`<h3 style="font-size:16px;margin-top:14px">Nilai tambah</h3><div class="chips" style="margin-top:8px">${m.pref.map(x=>chip(x,'req')).join('')}</div>`:''}
-  <p class="small muted" style="margin-top:10px">✓ sudah dimiliki${state.mode==='local'?' · ≈ mirip dengan skill yang dimiliki':''} · garis putus belum dimiliki</p></div>
+  <p class="small muted" style="margin-top:10px">✓ sudah dimiliki${state.mode==='local'?' · ≈ mirip dengan skill yang dimiliki':''} · garis putus belum dimiliki</p></div>`;
+  $('#drawer').innerHTML=`<div class="dh"><div style="min-width:0"><p class="eyebrow">${esc(j.company)}</p><h2 style="margin-top:8px">${esc(j.title)}</h2><p class="meta" style="margin-top:6px">${esc(j.loc)} · ${j.type} · ${LEVELS[j.lvl]}</p></div><button class="icon-btn" type="button" data-close aria-label="Tutup detail">✕</button></div>
+  ${nlpBlock}
   <div><h3 style="font-size:16px">Deskripsi pekerjaan</h3><p style="margin-top:6px">${esc(j.desc)}</p></div>
   <dl class="facts"><div><dt>Gaji</dt><dd>${fmtSal(j)}</dd></div><div><dt>Diposting</dt><dd>${ago(j.days)}</dd></div><div><dt>Tenggat</dt><dd>${dl}</dd></div><div><dt>Sumber</dt><dd>${state.mode==='api'?'Dataset sintetis (API)':'Data sintetis demo'}</dd></div></dl>
   <div class="d-actions"><button class="btn" type="button" data-save="${id}" aria-pressed="${sv}">${sv?'Tersimpan':'Simpan'}</button>
@@ -1045,7 +1123,7 @@ async function adminApiHTML(){
   const note=`<p class="msg">Terhubung ke API. Lowongan yang ditambah atau dihapus berlaku sampai server dimatikan, dan indeks dibangun ulang otomatis.</p>`;
   if(state.tab==='ringkasan'){
     const st=await call('/admin/stats',{admin:true});
-    const lv=LEVELS.map(l=>[l,(st.by_level||{})[l]||0]);const locs=entries(st.by_location).sort((a,b)=>b[1]-a[1]);const top=entries(st.top_required_skills);
+    const lv=LEVELS.map((l,i)=>[l,(st.by_level||{})[apiLvl(i)]||0]);const locs=entries(st.by_location).sort((a,b)=>b[1]-a[1]);const top=entries(st.top_required_skills);
     return note+`<section class="panel"><h2>Ringkasan data</h2><dl class="defs" style="margin-top:14px"><div><dt>Lowongan</dt><dd class="mono">${st.jobs}</dd></div><div><dt>Perusahaan</dt><dd class="mono">${st.companies}</dd></div><div><dt>Skill di kamus</dt><dd class="mono">${st.skills_in_dictionary}</dd></div><div><dt>Term terindeks</dt><dd class="mono">${st.indexed_terms}</dd></div><div><dt>Rata-rata term per lowongan</dt><dd class="mono">${st.avg_tokens_per_job}</dd></div><div><dt>Pencarian semantik</dt><dd class="mono">${esc(String(st.semantic_backend).toUpperCase())}</dd></div></dl></section>
     <div class="two"><section class="panel"><h2>Lowongan per level</h2>${lv.map(([k,v])=>bar(k,v,Math.max(...lv.map(x=>x[1])))).join('')}</section><section class="panel"><h2>Lowongan per lokasi</h2>${locs.map(([k,v])=>bar(k,v,locs[0][1])).join('')}</section></div>
     <section class="panel"><h2>Skill wajib terbanyak</h2>${top.map(([k,v])=>bar(k,v,top[0][1])).join('')}</section>`;
@@ -1083,7 +1161,7 @@ async function adminApiHTML(){
 }
 function activityHTML(){
   const cnt={};log.forEach(l=>l.skills.forEach(s=>cnt[s]=(cnt[s]||0)+1));const top=Object.entries(cnt).sort((a,b)=>b[1]-a[1]).slice(0,8);
-  return log.length?`<div class="two"><section class="panel"><h2>Skill yang paling sering dicari</h2>${top.length?top.map(([s,v])=>bar(s,v,top[0][1])).join(''):'<p class="muted small" style="margin-top:10px">Belum ada skill terdeteksi pada pencarian.</p>'}</section><section class="panel"><h2>Ringkasan</h2><dl class="defs" style="margin-top:14px"><div><dt>Pencarian tercatat</dt><dd class="mono">${log.length}</dd></div><div><dt>Tanpa hasil</dt><dd class="mono">${log.filter(l=>!l.n).length}</dd></div></dl></section></div><div class="tw"><table><thead><tr><th>Waktu</th><th>Kueri</th><th>Skill terbaca</th><th class="num">Hasil</th></tr></thead><tbody>${log.map(l=>`<tr><td class="mono small">${new Date(l.t).toLocaleString('id-ID',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})}</td><td>${esc(l.q.length>90?l.q.slice(0,90)+'…':l.q)}</td><td class="small">${l.skills.map(esc).join(', ')||'-'}</td><td class="num">${l.n}</td></tr>`).join('')}</tbody></table></div>`
+  return log.length?`<div class="act-bar"><button class="btn sm" type="button" id="act-reset">Reset riwayat</button></div><div class="two"><section class="panel"><h2>Skill yang paling sering dicari</h2>${top.length?top.map(([s,v])=>bar(s,v,top[0][1])).join(''):'<p class="muted small" style="margin-top:10px">Belum ada skill terdeteksi pada pencarian.</p>'}</section><section class="panel"><h2>Ringkasan</h2><dl class="defs" style="margin-top:14px"><div><dt>Pencarian tercatat</dt><dd class="mono">${log.length}</dd></div><div><dt>Tanpa hasil</dt><dd class="mono">${log.filter(l=>!l.n).length}</dd></div></dl></section></div><div class="tw"><table><thead><tr><th>Waktu</th><th>Kueri</th><th>Skill terbaca</th><th class="num">Hasil</th></tr></thead><tbody>${log.map(l=>`<tr><td class="mono small">${new Date(l.t).toLocaleString('id-ID',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})}</td><td>${esc(l.q.length>90?l.q.slice(0,90)+'…':l.q)}</td><td class="small">${l.skills.map(esc).join(', ')||'-'}</td><td class="num">${l.n}</td></tr>`).join('')}</tbody></table></div>`
   :`<section class="panel"><h2>Aktivitas pencarian</h2><p class="muted" style="margin-top:8px">Belum ada pencarian tercatat. Jalankan pencarian dari beranda atau halaman Cari Lowongan, lalu kembali ke sini.</p></section>`;
 }
 function adminLocalHTML(){
@@ -1125,8 +1203,42 @@ function adminLocalHTML(){
   <section class="panel"><h2>Kueri uji</h2><div class="tw" style="margin-top:12px"><table><thead><tr><th>Kueri</th><th>Bidang relevan</th></tr></thead><tbody>${TK.JUDGED.map(([q,f])=>`<tr><td>${esc(q)}</td><td>${f.map(k=>esc(CONCEPTS[k])).join(', ')}</td></tr>`).join('')}</tbody></table></div></section>`;
 }
 
+/* ---------- pencarian biasa (tanpa NLP) ---------- */
+const plainS={q:EXAMPLES[0],mode:'and',lim:15,jobs:[],hay:[]};
+const plainWords=q=>[...new Set(q.toLowerCase().split(/\s+/).map(w=>w.replace(/^[^a-z0-9+#]+|[^a-z0-9+#]+$/g,'')).filter(Boolean))];
+async function loadPlainJobs(){
+  if(state.mode!=='api'){plainS.jobs=TK.JOBS.slice();return}
+  const all=[];let off=0,total=1;
+  while(off<total){const r=await call('/jobs?limit=100&offset='+off,{timeout:15000});total=r.total;r.items.forEach(x=>{const j=jobFromApi(x);jobCache.set(j.id,j);all.push(j)});if(!r.items.length)break;off+=r.items.length}
+  plainS.jobs=all;
+}
+async function openPlain(){
+  try{await loadPlainJobs()}catch(e){if(e.status)return;dropToLocal();plainS.jobs=TK.JOBS.slice()}
+  plainS.hay=plainS.jobs.map(j=>(j.title+' '+j.company+' '+j.desc+' '+j.req.join(' ')+' '+j.pref.join(' ')).toLowerCase());
+  $('#q-plain').value=plainS.q;renderPlain();
+}
+const hlWords=(text,w)=>{const s=esc(text);const ws=w.filter(x=>x.length>=2).sort((a,b)=>b.length-a.length).map(x=>x.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'));return ws.length?s.replace(new RegExp('('+ws.join('|')+')','gi'),'<mark>$1</mark>'):s};
+function plainSnippet(j,w){const d=j.desc||'',l=d.toLowerCase();let at=-1;for(const x of w){const i=l.indexOf(x);if(i>=0&&(at<0||i<at))at=i}
+  if(at<0)return hlWords(d.slice(0,150),w)+(d.length>150?'…':'');const a=Math.max(0,at-60),b=Math.min(d.length,a+170);return(a>0?'…':'')+hlWords(d.slice(a,b),w)+(b<d.length?'…':'')}
+function renderPlain(){
+  const q=plainS.q,w=plainWords(q),H=plainS.hay,J=plainS.jobs;
+  let rows=J.map((j,i)=>({j,n:w.filter(x=>H[i].includes(x)).length}));
+  if(w.length)rows=rows.filter(o=>plainS.mode==='and'?o.n===w.length:o.n>0);
+  rows.sort((a,b)=>plainS.mode==='or'&&w.length?(b.n-a.n||a.j.days-b.j.days):a.j.days-b.j.days);
+  $('#plain-count').textContent=rows.length+' lowongan ditemukan dari '+J.length;
+  const em=$('#plain-empty');
+  if(!rows.length){
+    em.hidden=false;em.innerHTML='<h2 style="font-size:17px">Tidak ada hasil</h2>';
+  }else em.hidden=true;
+  $('#plain-results').innerHTML=rows.slice(0,plainS.lim).map(({j})=>`<li class="res"><div style="min-width:0"><h3><button class="link" data-open="${j.id}">${hlWords(j.title,w)}</button></h3><p class="meta" style="margin-top:4px">${esc(j.company)} · ${esc(j.loc)} · ${j.type}${LEVELS[j.lvl]===j.type?'':' · '+LEVELS[j.lvl]}</p><p class="meta mono" style="margin-top:2px;font-size:12px">${fmtSal(j)} · ${ago(j.days)}</p><p class="why" style="margin-top:6px">${plainSnippet(j,w)}</p></div></li>`).join('');
+  $('#plain-more').hidden=rows.length<=plainS.lim;
+}
+$('#plain-form').addEventListener('submit',e=>{e.preventDefault();plainS.q=$('#q-plain').value;plainS.lim=15;renderPlain()});
+$('#plain-more').addEventListener('click',()=>{plainS.lim+=15;renderPlain()});
+$('#plain-to-nlp').addEventListener('click',()=>goSearch($('#q-plain').value||plainS.q));
+
 /* ---------- router ---------- */
-const VIEWS=['beranda','cari','dasbor','admin'];
+const VIEWS=['beranda','cari','biasa','dasbor','admin'];
 function route(){
   const h=(location.hash||'#beranda').slice(1);const v=VIEWS.includes(h)?h:'beranda';
   const changed=state.view!==v;state.view=v;
@@ -1134,6 +1246,7 @@ function route(){
   $$('[data-nav]').forEach(a=>{if(a.dataset.nav===v)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
   closeDrawer();
   if(v==='cari'){$('#q-main').value=state.q;runSearch(false)}
+  if(v==='biasa')openPlain();
   if(v==='dasbor')renderDasbor();
   if(v==='admin')renderAdmin();
   if(changed)window.scrollTo(0,0);
@@ -1145,7 +1258,7 @@ async function setMode(m){
   state.mode=m;loadStores();state.admOff=0;initFilters();updateChip();
   renderBeranda();renderHero();
   const h=(location.hash||'#beranda').slice(1);
-  if(h==='cari')runSearch(false);else if(h==='dasbor')renderDasbor();else if(h==='admin')renderAdmin();
+  if(h==='cari')runSearch(false);else if(h==='biasa')openPlain();else if(h==='dasbor')renderDasbor();else if(h==='admin')renderAdmin();
 }
 async function connectApi(){
   $('#conn-status').textContent='Menghubungkan…';
@@ -1156,7 +1269,8 @@ async function connectApi(){
 
 /* ---------- events ---------- */
 document.addEventListener('click',async e=>{
-  const t=e.target.closest('[data-open],[data-save],[data-close],[data-ex],[data-cat],[data-rm],[data-del],[data-tab],[data-adm-page],[data-onlytype],#veil,#seed-x,#p-add-btn,#cv-go,#f-reset,#csv-copy,#eng-chip,#conn-save,#conn-local');if(!t)return;
+  const t=e.target.closest('[data-open],[data-save],[data-close],[data-ex],[data-cat],[data-rm],[data-del],[data-tab],[data-adm-page],[data-onlytype],#veil,#seed-x,#p-add-btn,#cv-go,#f-reset,#csv-copy,#eng-chip,#conn-save,#conn-local,#conn-logout,#act-reset');if(!t)return;
+  if(t.id==='act-reset'){if(confirm('Hapus semua riwayat aktivitas pencarian?')){log=[];persist();renderAdmin()}return}
   if(t.dataset.open){openJob(t.dataset.open,t);return}
   if(t.dataset.save){const id=t.dataset.save;saved=(saved||[]).includes(id)?saved.filter(x=>x!==id):[...saved,id];persist();
     $$(`[data-save="${id}"]`).forEach(b=>{const on=saved.includes(id);b.setAttribute('aria-pressed',on);if(b.closest('#saved'))return;b.textContent=on?'Tersimpan':'Simpan'});
@@ -1181,6 +1295,7 @@ document.addEventListener('click',async e=>{
   if(t.id==='conn-save'){api.base=($('#conn-url').value||'').trim().replace(/\/+$/,'');ls.set('tk.apiurl',api.base);const u=$('#conn-user').value.trim(),pw=$('#conn-pass').value;await connectApi();
     if(state.mode==='api'&&u&&pw){try{await login(u,pw);updateChip();if(state.view==='admin')renderAdmin()}catch(err){$('#conn-status').textContent=err.status?err.message:'Gagal menghubungi API.'}}
     $('#conn-pass').value='';return}
+  if(t.id==='conn-logout'){logout();updateChip();if(state.view==='admin')renderAdmin();return}
   if(t.id==='conn-local'){ls.set('tk.prefer','local');await setMode('local');return}
 });
 document.addEventListener('change',e=>{
@@ -1214,7 +1329,7 @@ document.addEventListener('submit',async e=>{
     if(state.mode==='api'){
       try{
         const req=[];for(const it of items){const f=await extractSkills(it);req.push(f[0]||it)}
-        const r=await call('/admin/jobs',{method:'POST',admin:true,body:{job_title:$('#a-title').value.trim(),company:$('#a-comp').value.trim(),description:$('#a-desc').value.trim(),experience_level:LEVELS[+$('#a-lvl').value],location:$('#a-loc').value,employment_type:$('#a-type').value,required_skills:req}});
+        const r=await call('/admin/jobs',{method:'POST',admin:true,body:{job_title:$('#a-title').value.trim(),company:$('#a-comp').value.trim(),description:$('#a-desc').value.trim(),experience_level:apiLvl(+$('#a-lvl').value),location:$('#a-loc').value,employment_type:$('#a-type').value,required_skills:req}});
         api.info=await call('/health');api.meta=await call('/meta');await renderAdmin();const m=$('#a-msg');if(m)m.textContent=`Lowongan ${r.job_id} ditambahkan dan indeks dibangun ulang.`;
       }catch(err){const m=$('#a-msg');if(m)m.textContent=err.status===401?'Masuk sebagai admin dulu (panel Sambungan).':'Gagal: '+err.message}
     }else{
@@ -1239,7 +1354,6 @@ document.addEventListener('keydown',e=>{
   if(e.key==='Enter'&&(e.ctrlKey||e.metaKey)&&e.target.id==='q-main'){e.preventDefault();state.q=e.target.value;runSearch(true)}
   if(!$('#drawer').hidden&&e.key==='Tab'){const f=$$('button,select,input,a[href]',$('#drawer'));if(f.length){const a=f[0],z=f[f.length-1];if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}}}
 });
-$('#theme').addEventListener('click',()=>{const r=document.documentElement;const dark=r.dataset.theme==='dark'||(!r.dataset.theme&&matchMedia('(prefers-color-scheme: dark)').matches);r.dataset.theme=dark?'light':'dark'});
 window.addEventListener('hashchange',route);
 
 /* ---------- mulai: tampil dulu dengan mesin browser, lalu beralih ke API bila ada ---------- */
@@ -1251,3 +1365,5 @@ window.__tk={state,api,call,setMode};
 })();
 
 </script>
+</body>
+</html>
